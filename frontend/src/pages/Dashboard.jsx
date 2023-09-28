@@ -7,30 +7,6 @@ import {
   Navigate
 } from "react-router-dom";
 import Home from '../pages/Home';
-import SalesList from '../pages/Sales/SalesList';
-import SalesReturnList from '../pages/Sales/SalesReturnList';
-import BuyersList from './Buyers/BuyersList';
-import ImportBuyers from './Buyers/ImportBuyers';
-import PurchaseList from '../pages/Purchase/PurchaseList';
-import PurchaseReturnList from '../pages/Purchase/PurchaseReturnList';
-import SuppliersList from '../pages/Suppliers/SuppliersList';
-import ImportSuppliers from '../pages/Suppliers/ImportSuppliers';
-import ProductsList from './Products/ProductsList';
-import ProductCategoriesList from './Products/ProductCategoriesList';
-import PrintLabels from './Products/PrintLabels';
-import ImportProducts from './Products/ImportProducts';
-import ExpensesList from '../pages/Expenses/ExpensesList';
-import ProfitLossReport from '../pages/Reports/ProfitLossReport';
-import PurchaseReport from '../pages/Reports/PurchaseReport';
-import PurchaseReturnReport from '../pages/Reports/PurchaseReturnReport';
-import PurchasePaymentsReport from '../pages/Reports/PurchasePaymentsReport';
-import ProductSalesReport from './Reports/ProductSalesReport';
-import ProductPurchaseReport from './Reports/ProductPurchaseReport';
-import SalesReport from '../pages/Reports/SalesReport';
-import SalesReturnReport from '../pages/Reports/SalesReturnReport';
-import SalesPaymentsReport from '../pages/Reports/SalesPaymentsReport';
-import StockReport from '../pages/Reports/StockReport';
-import ExpensesReport from '../pages/Reports/ExpensesReport';
 import UsersList from './Users/UsersList';
 import RolesList from './Users/RolesList';
 import SendSMS from './SMS/SendSMS';
@@ -38,9 +14,6 @@ import SMSTemplates from './SMS/SMSTemplstes';
 import SMSAPI from './SMS/SMSAPI';
 import CompanyProfile from './Settings/CompanyProfile';
 import SiteSettings from './Settings/SiteSettings';
-import TaxList from './Settings/TaxList';
-import UnitsList from './Settings/UnitsList';
-import PaymentTypesList from './Settings/PaymentTypesList';
 import ChangePassword from './Settings/ChangePassword';
 import DatabaseBackup from './Settings/DatabaseBackup';
 import Notification from '../components/Notification';
@@ -179,31 +152,6 @@ function Dashboard() {
               {/* Define routes and load corresponding components */}
               <Routes>
                 <Route path="/" element={<Home />} />
-                
-                <Route path="/sales/salesList" element={<SalesList />} />
-                <Route path="/sales/salesReturnList" element={<SalesReturnList />} />
-                <Route path="/buyers/buyersList" element={<BuyersList />} />
-                <Route path="/buyers/importBuyers" element={<ImportBuyers />} />
-                <Route path="/purchase/purchaseList" element={<PurchaseList />} />
-                <Route path="/purchase/purchaseReturnList" element={<PurchaseReturnList />} />
-                <Route path="/suppliers/suppliersList" element={<SuppliersList />} />
-                <Route path="/suppliers/importSuppliers" element={<ImportSuppliers />} />
-                <Route path="/products/productsList" element={<ProductsList />} />
-                <Route path="/products/productCategoriesList" element={<ProductCategoriesList />} />
-                <Route path="/products/printLabels" element={<PrintLabels />} />
-                <Route path="/products/importproducts" element={<ImportProducts />} />
-                <Route path="/expenses/expensesList" element={<ExpensesList />} />
-                <Route path="/reports/profitLossReport" element={<ProfitLossReport />} />
-                <Route path="/reports/purchaseReport" element={<PurchaseReport />} />
-                <Route path="/reports/purchaseReturnReport" element={<PurchaseReturnReport />} />
-                <Route path="/reports/purchasePaymentsReport" element={<PurchasePaymentsReport />} />
-                <Route path="/reports/productSalesReport" element={<ProductSalesReport />} />
-                <Route path="/reports/productPurchaseReport" element={<ProductPurchaseReport />} />
-                <Route path="/reports/salesReport" element={<SalesReport />} />
-                <Route path="/reports/salesReturnReport" element={<SalesReturnReport />} />
-                <Route path="/reports/salesPaymentsReport" element={<SalesPaymentsReport />} />
-                <Route path="/reports/stockReport" element={<StockReport />} />
-                <Route path="/reports/expensesReport" element={<ExpensesReport />} />
                 <Route path="/users/usersList" element={<UsersList />} />
                 <Route path="/users/rolesList" element={<RolesList />} />
                 <Route path="/sms/sendSMS" element={<SendSMS />} />
@@ -211,9 +159,6 @@ function Dashboard() {
                 <Route path="/sms/smsAPI" element={<SMSAPI />} />
                 <Route path="/settings/companyProfile" element={<CompanyProfile />} />
                 <Route path="/settings/siteSettings" element={<SiteSettings />} />
-                <Route path="/settings/taxList" element={<TaxList />} />
-                <Route path="/settings/unitsList" element={<UnitsList />} />
-                <Route path="/settings/paymentTypesList" element={<PaymentTypesList />} />
                 <Route path="/settings/changePassword" element={<ChangePassword />} />
                 <Route path="/settings/databaseBackup" element={<DatabaseBackup />} />
               </Routes>
