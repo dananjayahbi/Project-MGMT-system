@@ -7,6 +7,14 @@ import {
   Navigate
 } from "react-router-dom";
 import Home from '../pages/Home';
+import ManageFProjects from './FiverrProjects/ManageFProjects'
+import MonitorFProjects from './FiverrProjects/MonitorFProjects'
+import ManageCCProjects from './CodecannyonProj/ManageCCProjects'
+import MonitorCCProjects from './CodecannyonProj/MonitorCCProjects'
+import ManageCUProjects from './CustomProjects/ManageCUProjects'
+import MonitorCUProjects from './CustomProjects/MonitorCUProjects'
+import ManageFinance from './Finance/ManageFinance'
+import MonitorFinance from './Finance/MonitorFinance'
 import UsersList from './Users/UsersList';
 import RolesList from './Users/RolesList';
 import SendSMS from './SMS/SendSMS';
@@ -152,6 +160,14 @@ function Dashboard() {
               {/* Define routes and load corresponding components */}
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/fiverr/ManageFProjects" element={<ManageFProjects />} />
+                <Route path="/fiverr/MonitorFProjects" element={<MonitorFProjects />} />
+                <Route path="/codecannyon/ManageCCProjects" element={<ManageCCProjects />} />
+                <Route path="/codecannyon/MonitorCCProjects" element={<MonitorCCProjects />} />
+                <Route path="/customproj/ManageCUProjects" element={<ManageCUProjects />} />
+                <Route path="/customproj/MonitorCUProjects" element={<MonitorCUProjects />} />
+                <Route path="/finance/ManageFinance" element={<ManageFinance />} />
+                <Route path="/finance/MonitorFinance" element={<MonitorFinance />} />
                 <Route path="/users/usersList" element={<UsersList />} />
                 <Route path="/users/rolesList" element={<RolesList />} />
                 <Route path="/sms/sendSMS" element={<SendSMS />} />

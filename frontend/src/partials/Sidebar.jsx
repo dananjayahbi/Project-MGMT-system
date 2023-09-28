@@ -1,18 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
-import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
-import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import ImportExportIcon from '@mui/icons-material/ImportExport';
-import EggAltIcon from '@mui/icons-material/EggAlt';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import LabelIcon from '@mui/icons-material/Label';
-import CategoryIcon from '@mui/icons-material/Category';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import PinDropIcon from '@mui/icons-material/PinDrop';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import EmailIcon from '@mui/icons-material/Email';
@@ -22,11 +12,18 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import BadgeIcon from '@mui/icons-material/Badge';
 import LanguageIcon from '@mui/icons-material/Language';
 import PercentIcon from '@mui/icons-material/Percent';
-import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 import LockIcon from '@mui/icons-material/Lock';
 import StorageIcon from '@mui/icons-material/Storage';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import axios from "axios";
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import ConnectedTvIcon from '@mui/icons-material/ConnectedTv';
+import BusinessIcon from '@mui/icons-material/Business';
+import BrokenImageIcon from '@mui/icons-material/BrokenImage';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import CalculateIcon from '@mui/icons-material/Calculate';
+import ContactlessIcon from '@mui/icons-material/Contactless';
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const location = useLocation();
@@ -224,6 +221,294 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 }}
               </SidebarLinkGroup>
 
+              {/* Fiverr Projects */}
+              <SidebarLinkGroup activecondition={pathname.includes('fiverrProjects')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a
+                        href="#0"
+                        className={`block text-slate-200 truncate transition duration-150 ${
+                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <AccountTreeIcon/>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                              Fiverr Projects
+                            </span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          {checkPageAccess("Profit & Loss Report") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/fiverr/ManageFProjects"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <ConstructionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  Manage Projects
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+
+                          {checkPageAccess("Profit & Loss Report") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/fiverr/MonitorFProjects"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  Monitor Projects
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+
+              {/* Codecannyon Projects */}
+              <SidebarLinkGroup activecondition={pathname.includes('codecannyonProjects')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a
+                        href="#0"
+                        className={`block text-slate-200 truncate transition duration-150 ${
+                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <BusinessIcon/>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                            Codecannyon Proj.
+                            </span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          {checkPageAccess("Profit & Loss Report") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/codecannyon/ManageCCProjects"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <AccountTreeIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  Manage Projects
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+
+                          {checkPageAccess("Profit & Loss Report") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/codecannyon/MonitorCCProjects"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  Monitor Projects
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+
+              {/* Custom Projects */}
+              <SidebarLinkGroup activecondition={pathname.includes('customProjects')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a
+                        href="#0"
+                        className={`block text-slate-200 truncate transition duration-150 ${
+                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <BrokenImageIcon/>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                            Custom Projects
+                            </span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          {checkPageAccess("Profit & Loss Report") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/customproj/ManageCUProjects"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <AccountTreeIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  Manage Projects
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+
+                          {checkPageAccess("Profit & Loss Report") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/customproj/MonitorCUProjects"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  Monitor Projects
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+
+              {/* Finance */}
+              <SidebarLinkGroup activecondition={pathname.includes('finance')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a
+                        href="#0"
+                        className={`block text-slate-200 truncate transition duration-150 ${
+                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <AttachMoneyIcon/>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                            Finance
+                            </span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          {checkPageAccess("Profit & Loss Report") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/finance/ManageFinance"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <CalculateIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  Manage Finance
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+
+                          {checkPageAccess("Profit & Loss Report") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/finance/MonitorFinance"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <ContactlessIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  Monitor Finance
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+
               {/* Reports */}
               <SidebarLinkGroup activecondition={pathname.includes('reports')}>
                 {(handleClick, open) => {
@@ -299,7 +584,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <div className="flex items-center">
                             <PeopleAltIcon/>
                             <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Users
+                              Employees
                             </span>
                           </div>
                           {/* Icon */}
@@ -324,7 +609,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               >
                                 <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Users List
+                                  Employees List
                                 </span>
                               </NavLink>
                             </li>
