@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 //Setting up routing
+app.use("/fiverrProjects", require("./routes/FiverrProjectRoutes"));
 app.use("/reports", require("./routes/ReportsRoutes"));
 app.use("/users", require("./routes/UsersRoutes"));
 app.use("/roles", require("./routes/RolesRoutes"));

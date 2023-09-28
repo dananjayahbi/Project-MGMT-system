@@ -253,7 +253,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          {checkPageAccess("Profit & Loss Report") ?(
+                          {checkPageAccess("Manage Fiverr Projects") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -270,7 +270,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ): null}
 
-                          {checkPageAccess("Profit & Loss Report") ?(
+                          {checkPageAccess("Monitor Fiverr Projects") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -325,7 +325,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          {checkPageAccess("Profit & Loss Report") ?(
+                          {checkPageAccess("Manage CodeCannyon Projects") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -342,7 +342,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ): null}
 
-                          {checkPageAccess("Profit & Loss Report") ?(
+                          {checkPageAccess("Monitor CodeCannyon Projects") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -397,7 +397,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          {checkPageAccess("Profit & Loss Report") ?(
+                          {checkPageAccess("Manage Custom Projects") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -414,7 +414,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ): null}
 
-                          {checkPageAccess("Profit & Loss Report") ?(
+                          {checkPageAccess("Monitor Custom Projects") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -469,7 +469,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          {checkPageAccess("Profit & Loss Report") ?(
+                          {checkPageAccess("Manage Finance") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -486,7 +486,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ): null}
 
-                          {checkPageAccess("Profit & Loss Report") ?(
+                          {checkPageAccess("Monitor Finance") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -803,57 +803,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                 <LanguageIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                                   Site Settings
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("SMS API") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/settings/taxList"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <PercentIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Tax List
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("SMS API") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/settings/unitsList"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Units List
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("SMS API") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/settings/paymentTypesList"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Payment Types List
                                 </span>
                               </NavLink>
                             </li>
