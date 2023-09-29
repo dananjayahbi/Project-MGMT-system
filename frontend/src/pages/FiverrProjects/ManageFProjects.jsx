@@ -22,29 +22,29 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from "@mui/icons-material";
-//import AddRole from "./AddRole";
+import AddFProject from "./AddFProject";
 //import UpdateRole from "./UpdateRole";
 //import DeleteRole from "./DeleteRole";
 
 export default function RolesList() {
-  const [roles, setRoles] = useState([]);
-  const [filteredRoles, setFilteredRoles] = useState([]);
+  const [FProjects, setFProjects] = useState([]);
+  const [filteredFProjects, setFilteredFProjects] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
-  const [openPopupAddRole, setOpenPopupAddRole] = useState(false); //Popup for NewRole
+  const [openPopupAddFProject, setOpenPopupAddFProject] = useState(false); //Popup for NewRole
   const [openPopupUpdateRole, setOpenPopupUpdateRole] = useState(false); //Popup for UpdateRole
   const [openPopupDeleteRole, setOpenPopupDeleteRole] = useState(false); //Popup for DeleteRole
-  const [fetchedRID, setFetchedRID] = useState(null);
-  const [fetchedRole, setFetchedRole] = useState(null); //for delete functionality
+  const [fetchedFPID, setFetchedFPID] = useState(null);
+  const [fetchedFProject, setFetchedFProject] = useState(null); //for delete functionality
   const tableRef = useRef(null);
 
   
-  //Fetch All Roles
+  //Fetch All Fiverr Projects
   useEffect(() => {
-    const fetchRoles = async () => {
+    const fetchFProjects = async () => {
       try {
-        const response = await fetch("http://localhost:8070/roles/getAllRoles");
+        const response = await fetch("http://localhost:8070/fiverrProjects/getAllFiverrProjects");
         const data = await response.json();
-        setRoles(data);
+        setFProjects(data);
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
         console.error("Error fetching roles:", error);
@@ -52,8 +52,8 @@ export default function RolesList() {
       }
     };
 
-    fetchRoles();
-  }, [openPopupAddRole, openPopupUpdateRole, openPopupDeleteRole]);
+    fetchFProjects();
+  }, [openPopupAddFProject, openPopupUpdateRole, openPopupDeleteRole]);
 
   //Search functionality
   const [searchTerm, setSearchTerm] = useState("");
@@ -62,11 +62,11 @@ export default function RolesList() {
   };
 
   useEffect(() => {
-    const filtered = roles.filter((Role) => 
-      (Role.role && Role.role.toLowerCase().includes(searchTerm.toLowerCase()))
+    const filtered = FProjects.filter((fProjects) => 
+      (fProjects.projectName && fProjects.projectName.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-    setFilteredRoles(filtered);
-  }, [roles, searchTerm]);
+    setFilteredFProjects(filtered);
+  }, [FProjects, searchTerm]);
 
 
   //Handle Update
@@ -86,7 +86,7 @@ export default function RolesList() {
   return (
     <Box p={1}>
       <Box>
-        <Typography variant="h5">Roles</Typography>
+        <Typography variant="h5">Fiverr Projects</Typography>
         <Divider sx={{ mt: 2, mb: 7.5 }} />
       </Box>
 
@@ -115,10 +115,10 @@ export default function RolesList() {
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => {setOpenPopupAddRole(true)}}
+          onClick={() => {setOpenPopupAddFProject(true)}}
           sx={{ mt: -2, height: "40px" }}
         >
-          New Role
+          New Project
         </Button>
       </Box>
       <TableContainer component={Paper} sx={{ marginTop: 2, overflowX: 'auto', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)' }}>
@@ -140,29 +140,43 @@ export default function RolesList() {
                   <CircularProgress />
                 </TableCell>
               </TableRow>
-            ) : filteredRoles.length === 0 ? ( // Display "No matching records found"
+            ) : filteredFProjects.length === 0 ? ( // Display "No matching records found"
               <TableRow>
                 <TableCell colSpan={7} align="center">
                   No matching records found
                 </TableCell>
               </TableRow>
             ) : (
-              filteredRoles.map((Role) => (
-                <TableRow key={Role._id}>
-                  <TableCell>{Role.role}</TableCell>
-                  <TableCell>{Role.description}</TableCell>
+              filteredFProjects.map((Project) => (
+                <TableRow key={Project._id}>
+                  <TableCell>{Project.PID}</TableCell>
+                  <TableCell>{Project.projectName}</TableCell>
+                  <TableCell>{Project.description}</TableCell>
+                  <TableCell>{Project.priority}</TableCell>
                   <TableCell>
-                    {Role.status === 'Active' ? (
-                      <Chip label={Role.status} color="success" />
-                    ) : (
-                      <Chip label={Role.status} color="error" />
-                    )}
+                    {(() => {
+                      const statusColors = {
+                        requested: 'primary',
+                        processing: 'warning', 
+                        reviewing: 'info', 
+                        cnacelled: 'warning', 
+                        completed: 'success', 
+                      };
+
+                      const color = statusColors[Project.status.toLowerCase()];
+
+                      return color ? (
+                        <Chip label={Project.status} color={color} />
+                      ) : (
+                        <Chip label={Project.status} color="error" />
+                      );
+                    })()}
                   </TableCell>
                   <TableCell>
-                    <IconButton onClick={()=>{handleUpdate(Role._id)}}>
+                    <IconButton onClick={()=>{handleUpdate(Project._id)}}>
                       <EditIcon />
                     </IconButton>
-                    <IconButton onClick={()=>{handleDelete(Role._id, Role.role)}}>
+                    <IconButton onClick={()=>{handleDelete(Project._id, Project.role)}}>
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -172,15 +186,15 @@ export default function RolesList() {
             {/* Display the count of records */}
             <TableRow>
               <TableCell colSpan={7} align="left">
-                Total Roles : {filteredRoles.length}
+                Total Projects : {filteredFProjects.length}
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
 
-      {/*<AddRole openPopupAddRole={openPopupAddRole} setOpenPopupAddRole={setOpenPopupAddRole}></AddRole>
-      <UpdateRole openPopupUpdateRole={openPopupUpdateRole} setOpenPopupUpdateRole={setOpenPopupUpdateRole} roleID = {fetchedRID}></UpdateRole>
+      <AddFProject openPopupAddFProject={openPopupAddFProject} setOpenPopupAddFProject={setOpenPopupAddFProject}></AddFProject>
+      {/*<UpdateRole openPopupUpdateRole={openPopupUpdateRole} setOpenPopupUpdateRole={setOpenPopupUpdateRole} roleID = {fetchedRID}></UpdateRole>
                     <DeleteRole openPopupDeleteRole={openPopupDeleteRole} setOpenPopupDeleteRole={setOpenPopupDeleteRole} roleID = {fetchedRID} role = {fetchedRole}></DeleteRole>*/}
 
     </Box>
