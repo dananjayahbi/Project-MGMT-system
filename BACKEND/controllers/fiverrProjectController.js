@@ -1,54 +1,74 @@
 const FiverrProjects = require("../models/fiverrProject.model");
 
-//Add Project
+// Function to generate a random PID
+function generateRandomPID() {
+  const prefix = 'FP'; // First 2 letters
+  const length = 10; // Total length of the PID
+  const digits = '0123456789'; // Allowed digits
+
+  let pid = prefix;
+
+  for (let i = 0; i < length - prefix.length; i++) {
+      const randomIndex = Math.floor(Math.random() * digits.length);
+      pid += digits[randomIndex];
+  }
+
+  return pid;
+}
+
+// Add Project
 const addProject = async (req, res) => {
-    const {
-        projectName, 
-        description,
-        startDate,
-        deadline,
-        priority,
-        projectManagers,
-        assignedTeamMembers,
-        ProjectCategory,
-        projectBudjet,
-        attachments,
-        status,
-        notes,
-    } = req.body;
+  const {
+    projectName,
+    description,
+    startDate,
+    deadline,
+    priority,
+    projectManagers,
+    assignedTeamMembers,
+    ProjectCategory,
+    projectBudget, // Corrected property name
+    attachments,
+    status,
+    notes,
+} = req.body;
 
-    const existingProject = await FiverrProjects.findOne({
-        $or: [{ projectName: projectName }],
-    });
-    if (existingProject) {
-        return res
-        .status(400)
-        .json({ error: "A project with the same project name already exists" });
-    }
+  let existingProject;
+  let project;
+  let pid; // Declare pid variable outside of the loop
 
-    const project = await FiverrProjects.create({
-        projectName, 
-        description,
-        startDate,
-        deadline,
-        priority,
-        projectManagers,
-        assignedTeamMembers,
-        ProjectCategory,
-        projectBudjet,
-        attachments,
-        status,
-        notes,
-    });
+  do {
+      pid = generateRandomPID(); // Assign the generated PID
+      existingProject = await FiverrProjects.findOne({
+          PID: pid,
+      });
+  } while (existingProject);
 
-    if (project) {
-        res.status(200);
-        res.json("project added");
-    } else{
-        res.status(400);
-        res.json("Adding project failed");
-    }
+  project = await FiverrProjects.create({
+    PID: pid,
+    projectName,
+    description,
+    startDate,
+    deadline,
+    priority,
+    projectManagers,
+    assignedTeamMembers,
+    ProjectCategory,
+    projectBudget, // Corrected property name
+    attachments,
+    status,
+    notes,
+});
+
+  if (project) {
+      res.status(200);
+      res.json("Project added");
+  } else {
+      res.status(400);
+      res.json("Adding project failed");
+  }
 };
+
 
 //Get All Projects
 const getAllProjects = async (req, res) => {
@@ -80,7 +100,7 @@ const getProject = async (req, res) => {
         projectManagers,
         assignedTeamMembers,
         ProjectCategory,
-        projectBudjet,
+        projectBudget,
         attachments,
         status,
         notes,
@@ -96,7 +116,7 @@ const getProject = async (req, res) => {
         projectManagers,
         assignedTeamMembers,
         ProjectCategory,
-        projectBudjet,
+        projectBudget,
         attachments,
         status,
         notes,

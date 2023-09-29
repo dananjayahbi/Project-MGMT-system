@@ -125,10 +125,12 @@ export default function RolesList() {
         <Table ref={tableRef}>
           <TableHead sx={{ backgroundColor: '#f0f0f0' }}>
             <TableRow>
-              <TableCell>Role</TableCell>
+              <TableCell>Project ID</TableCell>
+              <TableCell>Project Name</TableCell>
               <TableCell>Description</TableCell>
+              <TableCell>Priority</TableCell>
               <TableCell>Status</TableCell>
-              <TableCell>Action</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

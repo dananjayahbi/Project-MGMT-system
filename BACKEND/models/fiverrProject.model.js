@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const newFiverrProject = new Schema(
   {
+    PID: {
+      type: String,
+      required: true,
+    },
     projectName: {
       type: String,
       required: true,
@@ -36,7 +40,7 @@ const newFiverrProject = new Schema(
         type: String,
         required: true,
     },
-    projectBudjet: {
+    projectBudget: {
         type: Number,
         required: true,
     },
