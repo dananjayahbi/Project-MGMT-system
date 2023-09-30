@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, FieldArray, Field } from "formik";
 import * as Yup from "yup";
-import dayjs from 'dayjs';
 import {
   Button,
   Grid,
@@ -68,7 +67,6 @@ export default function AddFProject(props) {
 
   const priority = ["High", "Medium", "Low"];
   const status = ["Requested", "Processing", "Reviewing", "Completed", "Cancelled"];
-  const today = dayjs();
 
   useEffect(() => {
     // Fetch all users

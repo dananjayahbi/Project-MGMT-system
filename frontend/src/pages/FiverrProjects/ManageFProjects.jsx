@@ -93,7 +93,7 @@ export default function RolesList() {
       <Box display="flex" justifyContent="flex-end" sx={{ mt: -3 }}>
       <TextField
         id="outlined-basic"
-        label="Search by Role"
+        label="Search by Project Name"
         variant="outlined"
         value={searchTerm}
         onChange={handleSearchTermChange}
