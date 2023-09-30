@@ -38,8 +38,8 @@ const validationSchema = Yup.object({
 });
 
 const mainSelections = [
-  { name: "Fiverr Projects", subs: ["Manage Fiverr Projects", "Monitor Fiverr Projects"] },
-  { name: "CodeCannyon Projects", subs: ["Manage CodeCannyon Projects", "Monitor CodeCannyon Projects"] },
+  { name: "Fiverr Projects", subs: ["Manage Fiverr Projects", "Monitor Fiverr Projects", "FP Categories"] },
+  { name: "CodeCannyon Projects", subs: ["Manage CodeCannyon Projects", "Monitor CodeCannyon Projects", "CCP Categories"] },
   { name: "Custom Projects", subs: ["Manage Custom Projects","Monitor Custom Projects"] },
   { name: "Finance", subs: ["Manage Finance", "Monitor Finance"] },
   { name: "Repoets", subs: ["Test"] },

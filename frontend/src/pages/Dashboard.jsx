@@ -24,6 +24,8 @@ import CompanyProfile from './Settings/CompanyProfile';
 import SiteSettings from './Settings/SiteSettings';
 import ChangePassword from './Settings/ChangePassword';
 import DatabaseBackup from './Settings/DatabaseBackup';
+import FProjectCategories from './FiverrProjects/FProjectCategories';
+import CCProjectCategories from './CodecannyonProj/CCProjectCategories';
 import Notification from '../components/Notification';
 import axios from "axios";
 
@@ -124,6 +126,60 @@ function Dashboard() {
       });
       sessionStorage.removeItem("roleDeleted");
     }
+
+    if (sessionStorage.getItem("FPCategoryCreated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "FP Category Created Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("FPCategoryCreated");
+    }
+
+    if (sessionStorage.getItem("FPCategoryUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "FP Category Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("FPCategoryUpdated");
+    }
+
+    if (sessionStorage.getItem("FPCategoryDeleted") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "FP Category Deleted Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("FPCategoryDeleted");
+    }
+
+    if (sessionStorage.getItem("CCPCategoryCreated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "CCP Category Created Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CCPCategoryCreated");
+    }
+
+    if (sessionStorage.getItem("CCPCategoryUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "CCP Category Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CCPCategoryUpdated");
+    }
+
+    if (sessionStorage.getItem("CCPCategoryDeleted") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "CCP Category Deleted Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CCPCategoryDeleted");
+    }//...
   });
 
 
@@ -162,8 +218,10 @@ function Dashboard() {
                 <Route path="/" element={<Home />} />
                 <Route path="/fiverr/ManageFProjects" element={<ManageFProjects />} />
                 <Route path="/fiverr/MonitorFProjects" element={<MonitorFProjects />} />
+                <Route path="/fiverr/FPCategories" element={<FProjectCategories />} />
                 <Route path="/codecannyon/ManageCCProjects" element={<ManageCCProjects />} />
                 <Route path="/codecannyon/MonitorCCProjects" element={<MonitorCCProjects />} />
+                <Route path="/codecannyon/CCPCategories" element={<CCProjectCategories />} />
                 <Route path="/customproj/ManageCUProjects" element={<ManageCUProjects />} />
                 <Route path="/customproj/MonitorCUProjects" element={<MonitorCUProjects />} />
                 <Route path="/finance/ManageFinance" element={<ManageFinance />} />

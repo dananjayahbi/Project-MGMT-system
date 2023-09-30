@@ -8,9 +8,11 @@ const addRole = async (req, res) => {
     // Transform permissions array from frontend data
     const pageNames = [
       "Manage Fiverr Projects", 
-      "Monitor Fiverr Projects", 
+      "Monitor Fiverr Projects",
+      "FP Categories",
       "Manage CodeCannyon Projects",
       "Monitor CodeCannyon Projects",
+      "CCP Categories",
       "Manage Custom Projects",
       "Monitor Custom Projects",
       "Manage Finance",

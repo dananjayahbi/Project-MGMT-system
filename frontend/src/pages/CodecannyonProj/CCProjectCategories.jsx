@@ -21,29 +21,29 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from "@mui/icons-material";
-import AddFPCategory from "./AddFPCategory";
-import UpdateFPCategory from "./UpdateFPCategory";
-import DeleteFPCategory from "./DeleteFPCategory";
+import AddCCPCategory from "./AddCCPCategory";
+import UpdateCCPCategory from "./UpdateCCPCategory";
+import DeleteCCPCategory from "./DeleteCCPCategory";
 
 export default function CCProjectCategories() {
-  const [FPCategories, setFPCategories] = useState([]);
-  const [filteredFPCategories, setFilteredFPCategories] = useState([]);
+  const [CCPCategories, setCCPCategories] = useState([]);
+  const [filteredCCPCategories, setFilteredCCPCategories] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
-  const [openPopupAddFPCategory, setOpenPopupAddFPCategory] = useState(false); //Popup for NewBrand
-  const [openPopupUpdateFPCategory, setOpenPopupUpdateFPCategory] = useState(false); //Popup for UpdateBrand
-  const [openPopupDeleteFPCategory, setOpenPopupDeleteFPCategory] = useState(false); //Popup for DeleteBrand
-  const [fetchedFPCategory, setFetchedFPCategory] = useState(null); //for delete functionality
-  const [fetchedFPCID, setFetchedFPCID] = useState(null);
+  const [openPopupAddCCPCategory, setOpenPopupAddCCPCategory] = useState(false); //Popup for New
+  const [openPopupUpdateCCPCategory, setOpenPopupUpdateCCPCategory] = useState(false); //Popup for Update
+  const [openPopupDeleteCCPCategory, setOpenPopupDeleteCCPCategory] = useState(false); //Popup for Delete
+  const [fetchedCCPCategory, setFetchedCCPCategory] = useState(null); //for delete functionality
+  const [fetchedCCPCID, setFetchedCCPCID] = useState(null);
   const tableRef = useRef(null);
 
   
-  //Fetch All FP Categories
+  //Fetch All CCP Categories
   useEffect(() => {
-    const fetchFPCategories= async () => {
+    const fetchCCPCategories= async () => {
       try {
-        const response = await fetch("http://localhost:8070/FPCategories/getAllFPCategories/");
+        const response = await fetch("http://localhost:8070/CCPCategories/getAllCCPCategories/");
         const data = await response.json();
-        setFPCategories(data);
+        setCCPCategories(data);
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -51,8 +51,8 @@ export default function CCProjectCategories() {
       }
     };
 
-    fetchFPCategories();
-  }, [openPopupAddFPCategory, openPopupUpdateFPCategory, openPopupDeleteFPCategory]);
+    fetchCCPCategories();
+  }, [openPopupAddCCPCategory, openPopupUpdateCCPCategory, openPopupDeleteCCPCategory]);
 
   //Search functionality
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,31 +61,31 @@ export default function CCProjectCategories() {
   };
 
   useEffect(() => {
-    const filtered = FPCategories.filter((Category) => 
+    const filtered = CCPCategories.filter((Category) => 
       (Category.categoryName && Category.categoryName.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-    setFilteredFPCategories(filtered);
-  }, [FPCategories, searchTerm]);
+    setFilteredCCPCategories(filtered);
+  }, [CCPCategories, searchTerm]);
 
 
   //Handle Update
-  function handleUpdate(FPCID){
-    setFetchedFPCID(FPCID);
-    setOpenPopupUpdateFPCategory(true);
+  function handleUpdate(CCPCID){
+    setFetchedCCPCID(CCPCID);
+    setOpenPopupUpdateCCPCategory(true);
   }
 
   //Handle Delete
-  function handleDelete(FPCID, Category){
-    setFetchedFPCategory(Category);
-    setFetchedFPCID(FPCID);
-    setOpenPopupDeleteFPCategory(true);
+  function handleDelete(CCPCID, Category){
+    setFetchedCCPCategory(Category);
+    setFetchedCCPCID(CCPCID);
+    setOpenPopupDeleteCCPCategory(true);
   }
 
   
   return (
     <Box p={1}>
       <Box>
-        <Typography variant="h5">Fiverr Project Categories</Typography>
+        <Typography variant="h5">CodeCannyon Project Categories</Typography>
         <Divider sx={{ mt: 2, mb: 7.5 }} />
       </Box>
 
@@ -114,7 +114,7 @@ export default function CCProjectCategories() {
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => {setOpenPopupAddFPCategory(true)}}
+          onClick={() => {setOpenPopupAddCCPCategory(true)}}
           sx={{ mt: -2, height: "40px" }}
         >
           Add Category
@@ -136,14 +136,14 @@ export default function CCProjectCategories() {
                   <CircularProgress />
                 </TableCell>
               </TableRow>
-            ) : filteredFPCategories.length === 0 ? ( // Display "No matching records found"
+            ) : filteredCCPCategories.length === 0 ? ( // Display "No matching records found"
               <TableRow>
                 <TableCell colSpan={7} align="center">
                   No matching records found
                 </TableCell>
               </TableRow>
             ) : (
-                filteredFPCategories.map((Catrgory) => (
+                filteredCCPCategories.map((Catrgory) => (
                 <TableRow key={Catrgory._id}>
                   <TableCell>{Catrgory.categoryName}</TableCell>
                   <TableCell>{Catrgory.description}</TableCell>
@@ -161,16 +161,16 @@ export default function CCProjectCategories() {
             {/* Display the count of records */}
             <TableRow>
               <TableCell colSpan={7} align="left">
-                Total Categories : {filteredFPCategories.length}
+                Total Categories : {filteredCCPCategories.length}
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
 
-      <AddFPCategory openPopupAddFPCategory={openPopupAddFPCategory} setOpenPopupAddFPCategory={setOpenPopupAddFPCategory}></AddFPCategory>
-      <UpdateFPCategory openPopupUpdateFPCategory={openPopupUpdateFPCategory} setOpenPopupUpdateFPCategory={setOpenPopupUpdateFPCategory} FPCID = {fetchedFPCID}></UpdateFPCategory>
-      <DeleteFPCategory openPopupDeleteFPCategory={openPopupDeleteFPCategory} setOpenPopupDeleteFPCategory={setOpenPopupDeleteFPCategory} FPCID = {fetchedFPCID} categoryName = {fetchedFPCategory}></DeleteFPCategory>
+      <AddCCPCategory openPopupAddCCPCategory={openPopupAddCCPCategory} setOpenPopupAddCCPCategory={setOpenPopupAddCCPCategory}></AddCCPCategory>
+      <UpdateCCPCategory openPopupUpdateCCPCategory={openPopupUpdateCCPCategory} setOpenPopupUpdateCCPCategory={setOpenPopupUpdateCCPCategory} CCPCID = {fetchedCCPCID}></UpdateCCPCategory>
+      <DeleteCCPCategory openPopupDeleteCCPCategory={openPopupDeleteCCPCategory} setOpenPopupDeleteCCPCategory={setOpenPopupDeleteCCPCategory} CCPCID = {fetchedCCPCID} categoryName = {fetchedCCPCategory}></DeleteCCPCategory>
 
     </Box>
   );  

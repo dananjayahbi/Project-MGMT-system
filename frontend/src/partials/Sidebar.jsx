@@ -286,6 +286,23 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               </NavLink>
                             </li>
                           ): null}
+
+                          {checkPageAccess("FP Categories") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/fiverr/FPCategories"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  FP Categories
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
                         </ul>
                       </div>
                     </React.Fragment>
@@ -354,6 +371,23 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                 <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                                   Monitor Projects
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+
+                          {checkPageAccess("CCP Categories") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/codecannyon/CCPCategories"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  CCP Categories
                                 </span>
                               </NavLink>
                             </li>
