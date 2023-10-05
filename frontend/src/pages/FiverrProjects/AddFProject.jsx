@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Formik, Form, FieldArray, Field } from "formik";
+import { Formik, Form, Field, useFormikContext } from "formik";
 import * as Yup from "yup";
 import {
   Button,
@@ -39,7 +39,7 @@ const INITIAL_FORM_STATE = {
   startDate: "",
   deadline: "",
   priority: "",
-  projectCategory: "",
+  ProjectCategory: '',
   projectBudget: "",
   notes: "",
   status: "",
@@ -48,9 +48,21 @@ const INITIAL_FORM_STATE = {
 };
 
 const validationSchema = Yup.object({
-  projectName: Yup.string().required("Project name is required"),
-  description: Yup.string().required("Description is required"),
-  // Add validation for other fields
+  projectName: Yup.string().nullable().required("Project name is required"),
+  description: Yup.string().nullable().required("Description is required"),
+  projectBudget: Yup.number().nullable()
+    .required("Project budget is required")
+    .min(0, "Project budget cannot be negative")
+    .positive("Project budget must be a positive number"),
+  startDate: Yup.date().nullable().required("Start date is required"),
+  deadline: Yup.date().nullable().required("Deadline is required"),
+  priority: Yup.string().nullable().required("Priority is required"),
+  ProjectCategory: Yup.string().nullable().required("ProjectCategory is required"),
+  status: Yup.string().nullable().required("Status is required"),
+  projectManagers: Yup.array().nullable()
+    .min(1, "At least one project manager is required")
+    .required("Project managers are required"),
+  teamMembers: Yup.array().nullable().min(1, "At least one team member is required"),
 });
 
 export default function AddFProject(props) {
@@ -64,6 +76,7 @@ export default function AddFProject(props) {
 
   const [projectManagers, setProjectManagers] = useState([]);
   const [teamMembers, setTeamMembers] = useState([]);
+  const [FPCategory,setFPCategory] = useState([]);
 
   const priority = ["High", "Medium", "Low"];
   const status = ["Requested", "Processing", "Reviewing", "Completed", "Cancelled"];
@@ -92,6 +105,20 @@ export default function AddFProject(props) {
       });
   }, []);
   
+  useEffect(() => {
+    async function fetchCategory() {
+      try {
+        const response = await fetch('http://localhost:8070/FPCategories/getAllFPCategories/');
+        const data = await response.json();
+        const categNames = data.map(categoryName => categoryName.categoryName);
+        setFPCategory(categNames);
+      } catch (error) {
+        console.error('Error fetching roles:', error);
+      }
+    }
+
+    fetchCategory();
+  }, [props, openPopupAddFProject]);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
@@ -167,6 +194,7 @@ export default function AddFProject(props) {
                         label="Priority"
                         inputProps={{ id: "priority" }}
                       >
+                        <MenuItem value="">Select the priority</MenuItem>
                         {priority.map((prio) => (
                           <MenuItem key={prio} value={prio}>
                             {prio}
@@ -175,9 +203,27 @@ export default function AddFProject(props) {
                       </Field>
                     </FormControl>
                   </Grid>
-                  <Grid item xs={6}>
-                    <CustomTextField name="ProjectCategory" label="Project Category" />
-                  </Grid>
+
+                  {FPCategory.length > 0 && (
+                    <Grid item xs={6}>
+                      <FormControl fullWidth variant="outlined">
+                        <InputLabel htmlFor="projectCategory">Category</InputLabel>
+                        <Field
+                          as={Select}
+                          name="ProjectCategory"
+                          label="Category"
+                          inputProps={{ id: "projectCategory" }}
+                        >
+                          {FPCategory.map((categ) => (
+                            <MenuItem key={categ} value={categ}>
+                              {categ}
+                            </MenuItem>
+                          ))}
+                        </Field>
+                      </FormControl>
+                    </Grid>
+                  )}
+
                   <Grid item xs={6}>
                     <CustomTextField name="projectBudget" label="Project Budget" />
                   </Grid>
@@ -190,6 +236,7 @@ export default function AddFProject(props) {
                         label="status"
                         inputProps={{ id: "status" }}
                       >
+                        <MenuItem value="">Select the Status</MenuItem>
                         {status.map((stat) => (
                           <MenuItem key={stat} value={stat}>
                             {stat}

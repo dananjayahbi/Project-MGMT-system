@@ -26,7 +26,7 @@ const StartDatePicker = (name, ...otherProps) => {
     InputLabelProps: {
       shrink: true,
     },
-    label: "Deadline",
+    label: "Start Date",
     InputProps: { inputProps: { min: formatDate(new Date().toDateString()) } },
   };
 
