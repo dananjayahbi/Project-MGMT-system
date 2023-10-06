@@ -198,6 +198,15 @@ function Dashboard() {
       });
       sessionStorage.removeItem("FProjectUpdated");
     }
+
+    if (sessionStorage.getItem("FProjectDeleted") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Fiverr project Deleted Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("FProjectDeleted");
+    }
   });
 
 

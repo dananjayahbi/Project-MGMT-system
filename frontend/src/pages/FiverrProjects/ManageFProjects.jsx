@@ -24,15 +24,15 @@ import {
 } from "@mui/icons-material";
 import AddFProject from "./AddFProject";
 import UpdateFPProject from "./UpdateFProject";
-//import DeleteRole from "./DeleteRole";
+import DeleteFProject from "./DeleteFProject";
 
-export default function RolesList() {
+export default function ManageFProjects() {
   const [FProjects, setFProjects] = useState([]);
   const [filteredFProjects, setFilteredFProjects] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
-  const [openPopupAddFProject, setOpenPopupAddFProject] = useState(false); //Popup for NewRole
-  const [openPopupUpdateFProject, setOpenPopupUpdateFProject] = useState(false); //Popup for UpdateRole
-  const [openPopupDeleteRole, setOpenPopupDeleteRole] = useState(false); //Popup for DeleteRole
+  const [openPopupAddFProject, setOpenPopupAddFProject] = useState(false); 
+  const [openPopupUpdateFProject, setOpenPopupUpdateFProject] = useState(false);
+  const [openPopupDeleteFProject, setOpenPopupDeleteFProject] = useState(false);
   const [fetchedFPID, setFetchedFPID] = useState(null);
   const [fetchedFProject, setFetchedFProject] = useState(null); //for delete functionality
   const tableRef = useRef(null);
@@ -47,13 +47,13 @@ export default function RolesList() {
         setFProjects(data);
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
-        console.error("Error fetching roles:", error);
+        console.error("Error fetching:", error);
         setLoading(false); // Set loading to false on error as well
       }
     };
 
     fetchFProjects();
-  }, [openPopupAddFProject, openPopupUpdateFProject, openPopupDeleteRole]);
+  }, [openPopupAddFProject, openPopupUpdateFProject, openPopupDeleteFProject]);
 
   //Search functionality
   const [searchTerm, setSearchTerm] = useState("");
@@ -70,16 +70,16 @@ export default function RolesList() {
 
 
   //Handle Update
-  function handleUpdate(RID){
-    setFetchedFPID(RID);
+  function handleUpdate(FPID){
+    setFetchedFPID(FPID);
     setOpenPopupUpdateFProject(true);
   }
 
   //Handle Delete
-  function handleDelete(RID, Role){
-    setFetchedRole(Role);
-    setFetchedRID(RID);
-    setOpenPopupDeleteRole(true);
+  function handleDelete(FPID, Project){
+    setFetchedFProject(Project);
+    setFetchedFPID(FPID);
+    setOpenPopupDeleteFProject(true);
   }
 
   
@@ -176,7 +176,7 @@ export default function RolesList() {
                     <IconButton onClick={()=>{handleUpdate(Project._id)}}>
                       <EditIcon />
                     </IconButton>
-                    <IconButton onClick={()=>{handleDelete(Project._id, Project.role)}}>
+                    <IconButton onClick={()=>{handleDelete(Project._id, Project.projectName)}}>
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -195,7 +195,7 @@ export default function RolesList() {
 
       <AddFProject openPopupAddFProject={openPopupAddFProject} setOpenPopupAddFProject={setOpenPopupAddFProject}></AddFProject>
       <UpdateFPProject openPopupUpdateFProject={openPopupUpdateFProject} setOpenPopupUpdateFProject={setOpenPopupUpdateFProject} FPID = {fetchedFPID}></UpdateFPProject>
-                {/*    <DeleteRole openPopupDeleteRole={openPopupDeleteRole} setOpenPopupDeleteRole={setOpenPopupDeleteRole} roleID = {fetchedRID} role = {fetchedRole}></DeleteRole>*/}
+      <DeleteFProject openPopupDeleteFProject={openPopupDeleteFProject} setOpenPopupDeleteFProject={setOpenPopupDeleteFProject} FPID = {fetchedFPID} projectName = {fetchedFProject}></DeleteFProject>
 
     </Box>
   );  
