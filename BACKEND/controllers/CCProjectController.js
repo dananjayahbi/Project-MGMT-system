@@ -1,8 +1,8 @@
-const FiverrProjects = require("../models/fiverrProject.model");
+const CCProjects = require("../models/ccProject.model");
 
 // Function to generate a random PID
 function generateRandomPID() {
-  const prefix = 'FP'; // First 2 letters
+  const prefix = 'CC'; // First 2 letters
   const length = 10; // Total length of the PID
   const digits = '0123456789'; // Allowed digits
 
@@ -39,12 +39,12 @@ const addProject = async (req, res) => {
 
   do {
       pid = generateRandomPID(); // Assign the generated PID
-      existingProject = await FiverrProjects.findOne({
+      existingProject = await CCProjects.findOne({
           PID: pid,
       });
   } while (existingProject);
 
-  project = await FiverrProjects.create({
+  project = await CCProjects.create({
     PID: pid,
     projectName,
     description,
@@ -72,7 +72,7 @@ const addProject = async (req, res) => {
 
 //Get All Projects
 const getAllProjects = async (req, res) => {
-    const abc = await FiverrProjects.find()
+    const abc = await CCProjects.find()
       .then((projects) => {
         res.json(projects);
       })
@@ -84,7 +84,7 @@ const getAllProjects = async (req, res) => {
 //Get a Project
 const getProject = async (req, res) => {
     try {
-      const projectObject = await FiverrProjects.findById(req.params.id);
+      const projectObject = await CCProjects.findById(req.params.id);
   
       if (!projectObject) {
         return res.status(404).json({ error: 'Project not found' });
@@ -160,7 +160,7 @@ const updateProject = async (req, res) => {
       };
   
       // Updating
-      const update = await FiverrProjects.findByIdAndUpdate(req.params.id, updateData);
+      const update = await CCProjects.findByIdAndUpdate(req.params.id, updateData);
   
       if (update) {
         res.status(200).json({
@@ -185,7 +185,7 @@ const updateProject = async (req, res) => {
 //Delete Project
 const deleteProject = async (req, res) => {
     try {
-      const deleted = await FiverrProjects.findByIdAndDelete(req.params.id);
+      const deleted = await CCProjects.findByIdAndDelete(req.params.id);
   
       if (deleted) {
         res.status(200).json({

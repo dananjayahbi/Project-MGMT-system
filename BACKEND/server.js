@@ -14,6 +14,7 @@ app.use(express.json());
 
 //Setting up routing
 app.use("/fiverrProjects", require("./routes/FiverrProjectRoutes"));
+app.use("/CCProjects", require("./routes/CCProjectRoutes"));
 app.use("/FPCategories", require("./routes/FProjectCategoriesRoutes"));
 app.use("/CCPCategories", require("./routes/CCProjectCategoriesRoutes"));
 app.use("/reports", require("./routes/ReportsRoutes"));
