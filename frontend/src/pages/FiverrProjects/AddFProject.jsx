@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Formik, Form, Field, useFormikContext } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {
   Button,
@@ -105,6 +105,7 @@ export default function AddFProject(props) {
       });
   }, []);
   
+  //Fetch all categories
   useEffect(() => {
     async function fetchCategory() {
       try {
@@ -124,8 +125,9 @@ export default function AddFProject(props) {
     try {
       // Handle form submission
       await axios.post(apiUrl, values);
-      sessionStorage.setItem("projectCreated", "1");
+      sessionStorage.setItem("FProjectCreated", "1");
       navigate("/fiverr/ManageFProjects");
+      
     } catch (error) {
       setNotify({
         isOpen: true,

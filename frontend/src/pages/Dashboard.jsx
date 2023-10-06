@@ -179,7 +179,25 @@ function Dashboard() {
         type: "success",
       });
       sessionStorage.removeItem("CCPCategoryDeleted");
-    }//...
+    }
+
+    if (sessionStorage.getItem("FProjectCreated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Fiverr project Created Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("FProjectCreated");
+    }
+
+    if (sessionStorage.getItem("FProjectUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Fiverr project Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("FProjectUpdated");
+    }
   });
 
 

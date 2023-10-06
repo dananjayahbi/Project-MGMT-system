@@ -23,7 +23,7 @@ import {
   Delete as DeleteIcon,
 } from "@mui/icons-material";
 import AddFProject from "./AddFProject";
-//import UpdateRole from "./UpdateRole";
+import UpdateFPProject from "./UpdateFProject";
 //import DeleteRole from "./DeleteRole";
 
 export default function RolesList() {
@@ -31,7 +31,7 @@ export default function RolesList() {
   const [filteredFProjects, setFilteredFProjects] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
   const [openPopupAddFProject, setOpenPopupAddFProject] = useState(false); //Popup for NewRole
-  const [openPopupUpdateRole, setOpenPopupUpdateRole] = useState(false); //Popup for UpdateRole
+  const [openPopupUpdateFProject, setOpenPopupUpdateFProject] = useState(false); //Popup for UpdateRole
   const [openPopupDeleteRole, setOpenPopupDeleteRole] = useState(false); //Popup for DeleteRole
   const [fetchedFPID, setFetchedFPID] = useState(null);
   const [fetchedFProject, setFetchedFProject] = useState(null); //for delete functionality
@@ -53,7 +53,7 @@ export default function RolesList() {
     };
 
     fetchFProjects();
-  }, [openPopupAddFProject, openPopupUpdateRole, openPopupDeleteRole]);
+  }, [openPopupAddFProject, openPopupUpdateFProject, openPopupDeleteRole]);
 
   //Search functionality
   const [searchTerm, setSearchTerm] = useState("");
@@ -71,8 +71,8 @@ export default function RolesList() {
 
   //Handle Update
   function handleUpdate(RID){
-    setFetchedRID(RID);
-    setOpenPopupUpdateRole(true);
+    setFetchedFPID(RID);
+    setOpenPopupUpdateFProject(true);
   }
 
   //Handle Delete
@@ -194,8 +194,8 @@ export default function RolesList() {
       </TableContainer>
 
       <AddFProject openPopupAddFProject={openPopupAddFProject} setOpenPopupAddFProject={setOpenPopupAddFProject}></AddFProject>
-      {/*<UpdateRole openPopupUpdateRole={openPopupUpdateRole} setOpenPopupUpdateRole={setOpenPopupUpdateRole} roleID = {fetchedRID}></UpdateRole>
-                    <DeleteRole openPopupDeleteRole={openPopupDeleteRole} setOpenPopupDeleteRole={setOpenPopupDeleteRole} roleID = {fetchedRID} role = {fetchedRole}></DeleteRole>*/}
+      <UpdateFPProject openPopupUpdateFProject={openPopupUpdateFProject} setOpenPopupUpdateFProject={setOpenPopupUpdateFProject} FPID = {fetchedFPID}></UpdateFPProject>
+                {/*    <DeleteRole openPopupDeleteRole={openPopupDeleteRole} setOpenPopupDeleteRole={setOpenPopupDeleteRole} roleID = {fetchedRID} role = {fetchedRole}></DeleteRole>*/}
 
     </Box>
   );  

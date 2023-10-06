@@ -32,7 +32,7 @@ const newFiverrProject = new Schema(
         type: String,
         required: true,
     }],
-    assignedTeamMembers: [{
+    teamMembers: [{
         type: String,
         required: true,
     }],
