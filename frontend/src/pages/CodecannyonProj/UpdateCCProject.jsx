@@ -41,29 +41,29 @@ const validationSchema = Yup.object({
 });
 
 //The Main function
-export default function UpdateFPProject(props) {
+export default function UpdateCCProject(props) {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
 
-  const apiUrl = `http://localhost:8070/fiverrProjects/updateFiverrProject/${props.FPID}`; // Change to your API URL
+  const apiUrl = `http://localhost:8070/CCProjects/updateCCProject/${props.CCPID}`; // Change to your API URL
 
   const navigate = useNavigate();
-  const { openPopupUpdateFProject, setOpenPopupUpdateFProject } = props;
-  const [fetchedFProjectData, setFetchedFProjectData] = useState();
+  const { openPopupUpdateCCProject, setOpenPopupUpdateCCProject } = props;
+  const [fetchedCCProjectData, setFetchedCCProjectData] = useState();
   const [loading, setLoading] = useState(true);
   const [projectManagers, setProjectManagers] = useState([]);
   const [teamMembers, setTeamMembers] = useState([]);
-  const [FPCategory,setFPCategory] = useState([]);
+  const [CCPCategory,setCCPCategory] = useState([]);
 
-  const formattedStartDate = fetchedFProjectData?.startDate
-  ? new Date(fetchedFProjectData.startDate).toISOString().split('T')[0]
+  const formattedStartDate = fetchedCCProjectData?.startDate
+  ? new Date(fetchedCCProjectData.startDate).toISOString().split('T')[0]
   : '';
 
-  const formattedDeadline = fetchedFProjectData?.deadline
-  ? new Date(fetchedFProjectData.deadline).toISOString().split('T')[0]
+  const formattedDeadline = fetchedCCProjectData?.deadline
+  ? new Date(fetchedCCProjectData.deadline).toISOString().split('T')[0]
   : '';
 
   const priority = ["High", "Medium", "Low"];
@@ -94,12 +94,12 @@ export default function UpdateFPProject(props) {
   }, []);
 
   
-    async function getFProject() {
+    async function getCCProject() {
         setLoading(true);
         await axios
-            .get(`http://localhost:8070/fiverrProjects/getFiverrProject/${props.FPID}`)
+            .get(`http://localhost:8070/CCProjects/getCCProject/${props.CCPID}`)
             .then((res) => {
-                setFetchedFProjectData(res.data);
+                setFetchedCCProjectData(res.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -110,26 +110,26 @@ export default function UpdateFPProject(props) {
     }
 
     useEffect(() =>{
-        if (props.FPID != null){
-            getFProject();
+        if (props.CCPID != null){
+            getCCProject();
         }
-    }, [props, openPopupUpdateFProject]);
+    }, [props, openPopupUpdateCCProject]);
 
     //Fetch all categories
     useEffect(() => {
         async function fetchCategory() {
         try {
-            const response = await fetch('http://localhost:8070/FPCategories/getAllFPCategories/');
+            const response = await fetch('http://localhost:8070/CCPCategories/getAllCCPCategories/');
             const data = await response.json();
             const categNames = data.map(categoryName => categoryName.categoryName);
-            setFPCategory(categNames);
+            setCCPCategory(categNames);
         } catch (error) {
-            console.error('Error fetching roles:', error);
+            console.error('Error fetching:', error);
         }
         }
 
         fetchCategory();
-    }, [props, openPopupUpdateFProject]);
+    }, [props, openPopupUpdateCCProject]);
 
 
     const handleSubmit = async (values, { setSubmitting }) => {
@@ -150,8 +150,8 @@ export default function UpdateFPProject(props) {
         };
   
         await axios.put(apiUrl, dataToSend);
-        sessionStorage.setItem("FProjectUpdated", "1");
-        navigate("/fiverr/ManageFProjects");
+        sessionStorage.setItem("CCProjectUpdated", "1");
+        navigate("/codecannyon/ManageCCProjects");
       } catch (error) {
         setNotify({
           isOpen: true,
@@ -160,14 +160,14 @@ export default function UpdateFPProject(props) {
         });
       } finally {
         setSubmitting(false);
-        setOpenPopupUpdateFProject(false);
+        setOpenPopupUpdateCCProject(false);
       }
     };
 
   return (
     <Dialog
-      open={openPopupUpdateFProject}
-      onBackdropClick={() => setOpenPopupUpdateFProject(false)}
+      open={openPopupUpdateCCProject}
+      onBackdropClick={() => setOpenPopupUpdateCCProject(false)}
       maxWidth="md"
       TransitionComponent={Transition}
       PaperProps={{
@@ -178,7 +178,7 @@ export default function UpdateFPProject(props) {
         <DialogTitle>
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
-            <p className="popupTitle">Update Fiverr Project</p>
+            <p className="popupTitle">Update CodeCannyon Project</p>
           </div>
         </div>
 
@@ -202,18 +202,18 @@ export default function UpdateFPProject(props) {
         ) : (
           <Formik
             initialValues={{
-                projectName: fetchedFProjectData?.projectName || "",
-                description: fetchedFProjectData?.description || "",
+                projectName: fetchedCCProjectData?.projectName || "",
+                description: fetchedCCProjectData?.description || "",
                 startDate: formattedStartDate || "",
                 deadline: formattedDeadline|| "",
-                priority: fetchedFProjectData?.priority || "",
-                projectManagers: fetchedFProjectData?.projectManagers || [],
-                teamMembers: fetchedFProjectData?.teamMembers || [],
-                ProjectCategory: fetchedFProjectData?.ProjectCategory || "",
-                projectBudget: fetchedFProjectData?.projectBudget || "",
-                attachments: fetchedFProjectData?.attachments || [],
-                status: fetchedFProjectData?.status || "",
-                notes: fetchedFProjectData?.notes || "",
+                priority: fetchedCCProjectData?.priority || "",
+                projectManagers: fetchedCCProjectData?.projectManagers || [],
+                teamMembers: fetchedCCProjectData?.teamMembers || [],
+                ProjectCategory: fetchedCCProjectData?.ProjectCategory || "",
+                projectBudget: fetchedCCProjectData?.projectBudget || "",
+                attachments: fetchedCCProjectData?.attachments || [],
+                status: fetchedCCProjectData?.status || "",
+                notes: fetchedCCProjectData?.notes || "",
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -252,7 +252,7 @@ export default function UpdateFPProject(props) {
                         </FormControl>
                     </Grid>
 
-                        {FPCategory.length > 0 && (
+                        {CCPCategory.length > 0 && (
                             <Grid item xs={6}>
                                 <FormControl fullWidth variant="outlined">
                                 <InputLabel htmlFor="projectCategory">Category</InputLabel>
@@ -262,7 +262,7 @@ export default function UpdateFPProject(props) {
                                     label="Category"
                                     inputProps={{ id: "projectCategory" }}
                                 >
-                                    {FPCategory.map((categ) => (
+                                    {CCPCategory.map((categ) => (
                                     <MenuItem key={categ} value={categ}>
                                         {categ}
                                     </MenuItem>
@@ -397,7 +397,7 @@ export default function UpdateFPProject(props) {
                   startIcon={<ClearIcon />}
                   style={{marginRight: "15px"}}
                   onClick={() => {
-                    setOpenPopupUpdateFProject(false);
+                    setOpenPopupUpdateCCProject(false);
                   }}
                   variant="outlined"
                   color="primary"

@@ -23,7 +23,7 @@ import {
   Delete as DeleteIcon,
 } from "@mui/icons-material";
 import AddCCProject from "./AddCCProject";
-//import UpdateFPProject from "./UpdateCCProject";
+import UpdateCCProject from "./UpdateCCProject";
 //import DeleteCCProject from "./DeleteCCProject";
 
 export default function ManageCCProjects() {
@@ -194,8 +194,8 @@ export default function ManageCCProjects() {
       </TableContainer>
 
       <AddCCProject openPopupAddCCProject={openPopupAddCCProject} setOpenPopupAddCCProject={setOpenPopupAddCCProject}></AddCCProject>
-      {/*<UpdateFPProject openPopupUpdateCCProject={openPopupUpdateCCProject} setOpenPopupUpdateCCProject={setOpenPopupUpdateCCProject} CCPID = {fetchedCCPID}></UpdateFPProject>
-                  <DeleteCCProject openPopupDeleteCCProject={openPopupDeleteCCProject} setOpenPopupDeleteCCProject={setOpenPopupDeleteCCProject} CCPID = {fetchedCCPID} projectName = {fetchedCCProject}></DeleteCCProject>*/}
+      <UpdateCCProject openPopupUpdateCCProject={openPopupUpdateCCProject} setOpenPopupUpdateCCProject={setOpenPopupUpdateCCProject} CCPID = {fetchedCCPID}></UpdateCCProject>
+           {/*       <DeleteCCProject openPopupDeleteCCProject={openPopupDeleteCCProject} setOpenPopupDeleteCCProject={setOpenPopupDeleteCCProject} CCPID = {fetchedCCPID} projectName = {fetchedCCProject}></DeleteCCProject>*/}
 
     </Box>
   );  
