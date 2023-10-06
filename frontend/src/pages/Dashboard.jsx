@@ -207,6 +207,15 @@ function Dashboard() {
       });
       sessionStorage.removeItem("FProjectDeleted");
     }
+
+    if (sessionStorage.getItem("CCProjectCreated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "CodeCannyon project Created Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CCProjectCreated");
+    }
   });
 
 
