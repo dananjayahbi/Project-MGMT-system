@@ -13,20 +13,15 @@ app.use(cors());
 app.use(express.json());
 
 //Setting up routing
-app.use("/sales", require("./routes/SalesRoutes"));
-app.use("/Buyers", require("./routes/BuyersRoutes"));
-app.use("/purchase", require("./routes/PurchaseRoutes"));
-app.use("/suppliers", require("./routes/SuppliersRoutes"));
-app.use("/products", require("./routes/ProductsRoutes"));
-app.use("/expenses", require("./routes/ExpensesRoutes"));
+app.use("/fiverrProjects", require("./routes/FiverrProjectRoutes"));
+app.use("/CCProjects", require("./routes/CCProjectRoutes"));
+app.use("/FPCategories", require("./routes/FProjectCategoriesRoutes"));
+app.use("/CCPCategories", require("./routes/CCProjectCategoriesRoutes"));
 app.use("/reports", require("./routes/ReportsRoutes"));
 app.use("/users", require("./routes/UsersRoutes"));
 app.use("/roles", require("./routes/RolesRoutes"));
 app.use("/rolesPermissions", require("./routes/RolesPermissionsRoutes"));
 app.use("/sms", require("./routes/SMSRoutes"));
-app.use("/tax", require("./routes/TaxListRouters"));
-app.use("/unit", require("./routes/UnitListRoutes"));
-app.use("/productCategory", require("./routes/ProductCategoryRoutes"));
 
 app.listen(PORT, () => {
   console.log("Server up with port : " + PORT);

@@ -14,7 +14,7 @@ import {
   Menu,
   MenuItem,
   Avatar,
-  CircularProgress, // Added for loading animation
+  CircularProgress,
   ListItemIcon,
   Typography,
   Divider,

@@ -46,16 +46,14 @@ const validationSchema = Yup.object({
 const apiUrl = "http://localhost:8070/roles/addRole"; // Change to your API URL
 
 const mainSelections = [
-    { name: "Sales", subs: ["Sales List", "Sales Return List"] },
-    { name: "Buyers", subs: ["Buyers List", "Import Buyers"] },
-    { name: "Purchase", subs: ["Purchase List","Purchase Return List"] },
-    { name: "Suppliers", subs: ["Suppliers List", "Import Suppliers"] },
-    { name: "Products", subs: ["Products List","Products Categories List","Print Labels", "Import Products"] },
-    { name: "Expenses", subs: ["Expenses List"] },
-    { name: "Repoets", subs: ["Profit & Loss Report", "Purchase Report", "Purchase Retuen Report", "Purchase Payments Report", "Product Sales Report", "Product Purchase Report", "Sales Report", "Sales Return Report", "Sales Payments Report", "Stock Report", "Expenses Report"] },
+    { name: "Fiverr Projects", subs: ["Manage Fiverr Projects", "Monitor Fiverr Projects", "FP Categories"] },
+    { name: "CodeCannyon Projects", subs: ["Manage CodeCannyon Projects", "Monitor CodeCannyon Projects", "CCP Categories"] },
+    { name: "Custom Projects", subs: ["Manage Custom Projects","Monitor Custom Projects"] },
+    { name: "Finance", subs: ["Manage Finance", "Monitor Finance"] },
+    { name: "Repoets", subs: ["Test"] },
     { name: "Users", subs: ["Users List", "Roles List"] },
     { name: "SMS", subs: ["Send SMS", "SMS Templates", "SMS API"] },
-    { name: "Settings", subs: ["Company Profile", "Site Settings", "Tax List", "Units List", "Payment Types List", "Change Password", "Database Backup"] },
+    { name: "Settings", subs: ["Company Profile", "Site Settings", "Change Password", "Database Backup"] },
     // Add more main selections and their sub-selections as needed
 ];
 

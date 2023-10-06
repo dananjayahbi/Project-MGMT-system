@@ -1,18 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
-import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
-import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import ImportExportIcon from '@mui/icons-material/ImportExport';
-import EggAltIcon from '@mui/icons-material/EggAlt';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import LabelIcon from '@mui/icons-material/Label';
-import CategoryIcon from '@mui/icons-material/Category';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import PinDropIcon from '@mui/icons-material/PinDrop';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import EmailIcon from '@mui/icons-material/Email';
@@ -22,11 +12,18 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import BadgeIcon from '@mui/icons-material/Badge';
 import LanguageIcon from '@mui/icons-material/Language';
 import PercentIcon from '@mui/icons-material/Percent';
-import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 import LockIcon from '@mui/icons-material/Lock';
 import StorageIcon from '@mui/icons-material/Storage';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import axios from "axios";
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import ConnectedTvIcon from '@mui/icons-material/ConnectedTv';
+import BusinessIcon from '@mui/icons-material/Business';
+import BrokenImageIcon from '@mui/icons-material/BrokenImage';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import CalculateIcon from '@mui/icons-material/Calculate';
+import ContactlessIcon from '@mui/icons-material/Contactless';
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const location = useLocation();
@@ -224,15 +221,15 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 }}
               </SidebarLinkGroup>
 
-              {/* Sales */}
-              <SidebarLinkGroup activecondition={pathname.includes('sales')}>
-                {(handleClick, open) => {       
+              {/* Fiverr Projects */}
+              <SidebarLinkGroup activecondition={pathname.includes('fiverrProjects')}>
+                {(handleClick, open) => {
                   return (
                     <React.Fragment>
                       <a
                         href="#0"
                         className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes('sales') ? 'hover:text-slate-200' : 'hover:text-white'
+                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -241,9 +238,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <AirlineStopsIcon/>
+                            <AccountTreeIcon/>
                             <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Sales
+                              Fiverr Projects
                             </span>
                           </div>
                           {/* Icon */}
@@ -256,36 +253,52 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-
-                            {checkPageAccess("Sales List") ?(
-                              <li className="mb-1 last:mb-0">
-                                <NavLink
-                                  end
-                                  to="/sales/salesList"
-                                  className={({ isActive }) =>
-                                    'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                  }
-                                >
-                                  <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                  <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                    Sales List
-                                  </span>
-                                </NavLink>
-                              </li>
-                            ): null}
-
-                          {checkPageAccess("Sales Return List") ?(
+                          {checkPageAccess("Manage Fiverr Projects") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/sales/salesReturnList"
+                                to="/fiverr/ManageFProjects"
                                 className={({ isActive }) =>
                                   'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                                 }
                               >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <ConstructionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Sales Return List
+                                  Manage Projects
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+
+                          {checkPageAccess("Monitor Fiverr Projects") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/fiverr/MonitorFProjects"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  Monitor Projects
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+
+                          {checkPageAccess("FP Categories") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/fiverr/FPCategories"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  FP Categories
                                 </span>
                               </NavLink>
                             </li>
@@ -297,15 +310,15 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 }}
               </SidebarLinkGroup>
 
-              {/* Buyers */}
-              <SidebarLinkGroup activecondition={pathname.includes('buyers')}>
+              {/* Codecannyon Projects */}
+              <SidebarLinkGroup activecondition={pathname.includes('codecannyonProjects')}>
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
                       <a
                         href="#0"
                         className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes('buyers') ? 'hover:text-slate-200' : 'hover:text-white'
+                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -314,9 +327,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <PeopleAltIcon/>
+                            <BusinessIcon/>
                             <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Buyers
+                            Codecannyon Proj.
                             </span>
                           </div>
                           {/* Icon */}
@@ -329,36 +342,52 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-
-                          {checkPageAccess("Buyers List") ?(
+                          {checkPageAccess("Manage CodeCannyon Projects") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/buyers/buyersList"
+                                to="/codecannyon/ManageCCProjects"
                                 className={({ isActive }) =>
                                   'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                                 }
                               >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <AccountTreeIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Buyers List
+                                  Manage Projects
                                 </span>
                               </NavLink>
                             </li>
                           ): null}
 
-                          {checkPageAccess("Import Buyers") ?(
+                          {checkPageAccess("Monitor CodeCannyon Projects") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/buyers/importBuyers"
+                                to="/codecannyon/MonitorCCProjects"
                                 className={({ isActive }) =>
                                   'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                                 }
                               >
-                                <ImportExportIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Import Buyers
+                                  Monitor Projects
+                                </span>
+                              </NavLink>
+                            </li>
+                          ): null}
+
+                          {checkPageAccess("CCP Categories") ?(
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/codecannyon/CCPCategories"
+                                className={({ isActive }) =>
+                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
+                                }
+                              >
+                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  CCP Categories
                                 </span>
                               </NavLink>
                             </li>
@@ -370,15 +399,15 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 }}
               </SidebarLinkGroup>
 
-              {/* Purchase */}
-              <SidebarLinkGroup activecondition={pathname.includes('purchase')}>
+              {/* Custom Projects */}
+              <SidebarLinkGroup activecondition={pathname.includes('customProjects')}>
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
                       <a
                         href="#0"
                         className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes('purchase') ? 'hover:text-slate-200' : 'hover:text-white'
+                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -387,9 +416,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <EggAltIcon/>
+                            <BrokenImageIcon/>
                             <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Purchase
+                            Custom Projects
                             </span>
                           </div>
                           {/* Icon */}
@@ -402,36 +431,35 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-
-                          {checkPageAccess("Purchase List") ?(
+                          {checkPageAccess("Manage Custom Projects") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/purchase/purchaseList"
+                                to="/customproj/ManageCUProjects"
                                 className={({ isActive }) =>
                                   'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                                 }
                               >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <AccountTreeIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Purchase List
+                                  Manage Projects
                                 </span>
                               </NavLink>
                             </li>
                           ): null}
 
-                          {checkPageAccess("Purchase Return List") ?(
+                          {checkPageAccess("Monitor Custom Projects") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/purchase/purchaseReturnList"
+                                to="/customproj/MonitorCUProjects"
                                 className={({ isActive }) =>
                                   'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                                 }
                               >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Purchase Return List
+                                  Monitor Projects
                                 </span>
                               </NavLink>
                             </li>
@@ -443,15 +471,15 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 }}
               </SidebarLinkGroup>
 
-              {/* Suppliers */}
-              <SidebarLinkGroup activecondition={pathname.includes('suppliers')}>
+              {/* Finance */}
+              <SidebarLinkGroup activecondition={pathname.includes('finance')}>
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
                       <a
                         href="#0"
                         className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes('suppliers') ? 'hover:text-slate-200' : 'hover:text-white'
+                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -460,9 +488,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <GroupAddIcon/>
+                            <AttachMoneyIcon/>
                             <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Suppliers
+                            Finance
                             </span>
                           </div>
                           {/* Icon */}
@@ -475,199 +503,35 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-
-                          {checkPageAccess("Suppliers List") ?(
+                          {checkPageAccess("Manage Finance") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/suppliers/suppliersList"
+                                to="/finance/ManageFinance"
                                 className={({ isActive }) =>
                                   'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                                 }
                               >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <CalculateIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Suppliers List
+                                  Manage Finance
                                 </span>
                               </NavLink>
                             </li>
                           ): null}
 
-                          {checkPageAccess("Import Suppliers") ?(
+                          {checkPageAccess("Monitor Finance") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/suppliers/importSuppliers"
+                                to="/finance/MonitorFinance"
                                 className={({ isActive }) =>
                                   'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                                 }
                               >
-                                <ImportExportIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
+                                <ContactlessIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Import Suppliers
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
-
-              {/* Products */}
-              <SidebarLinkGroup activecondition={pathname.includes('product')}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a
-                        href="#0"
-                        className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes('item') ? 'hover:text-slate-200' : 'hover:text-white'
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <CategoryIcon/>
-                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                            Products
-                            </span>
-                          </div>
-                          {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-
-                          {checkPageAccess("Products List") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/products/productsList"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Products List
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Products Categories List") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/products/productCategoriesList"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Products Categories List
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Print Labels") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/products/printLabels"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <LabelIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Print Labels
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Import Products") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/products/importProducts"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <ImportExportIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Import Products
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
-
-              {/* Expenses */}
-              <SidebarLinkGroup activecondition={pathname.includes('expenses')}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a
-                        href="#0"
-                        className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes('expenses') ? 'hover:text-slate-200' : 'hover:text-white'
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <RemoveCircleOutlineIcon/>
-                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Expenses
-                            </span>
-                          </div>
-                          {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-
-                          {checkPageAccess("Expenses List") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/expenses/expensesList"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Expenses List
+                                  Monitor Finance
                                 </span>
                               </NavLink>
                             </li>
@@ -723,177 +587,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               >
                                 <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Profit & Loss Report
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Purchase Report") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/reports/purchaseReport"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Purchase Report
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Purchase Retuen Report") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/reports/purchaseReturnReport"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Purchase Return<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Report
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Purchase Payments Report") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/reports/purchasePaymentsReport"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Purchase Payments<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Report
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Product Sales Report") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/reports/productSalesReport"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Product Sales Report
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Product Purchase Report") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/reports/productPurchaseReport"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Product Purchase <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Report
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Sales Report") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/reports/salesReport"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Sales Report
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Sales Return Report") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/reports/salesReturnReport"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Sales Return Report
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Sales Payments Report") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/reports/salesPaymentsReport"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Sales Payments<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Report
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Stock Report") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/reports/stockReport"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Stock Report
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Expenses Report") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/reports/expensesReport"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Expenses Report
+                                  Test node
                                 </span>
                               </NavLink>
                             </li>
@@ -924,7 +618,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <div className="flex items-center">
                             <PeopleAltIcon/>
                             <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Users
+                              Employees
                             </span>
                           </div>
                           {/* Icon */}
@@ -949,7 +643,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               >
                                 <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Users List
+                                  Employees List
                                 </span>
                               </NavLink>
                             </li>
@@ -1143,57 +837,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                 <LanguageIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                                   Site Settings
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("SMS API") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/settings/taxList"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <PercentIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Tax List
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("SMS API") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/settings/unitsList"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Units List
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("SMS API") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/settings/paymentTypesList"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Payment Types List
                                 </span>
                               </NavLink>
                             </li>
