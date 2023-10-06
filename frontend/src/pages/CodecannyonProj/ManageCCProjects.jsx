@@ -24,7 +24,7 @@ import {
 } from "@mui/icons-material";
 import AddCCProject from "./AddCCProject";
 import UpdateCCProject from "./UpdateCCProject";
-//import DeleteCCProject from "./DeleteCCProject";
+import DeleteCCProject from "./DeleteCCProject";
 
 export default function ManageCCProjects() {
   const [CCProjects, setCCProjects] = useState([]);
@@ -195,7 +195,7 @@ export default function ManageCCProjects() {
 
       <AddCCProject openPopupAddCCProject={openPopupAddCCProject} setOpenPopupAddCCProject={setOpenPopupAddCCProject}></AddCCProject>
       <UpdateCCProject openPopupUpdateCCProject={openPopupUpdateCCProject} setOpenPopupUpdateCCProject={setOpenPopupUpdateCCProject} CCPID = {fetchedCCPID}></UpdateCCProject>
-           {/*       <DeleteCCProject openPopupDeleteCCProject={openPopupDeleteCCProject} setOpenPopupDeleteCCProject={setOpenPopupDeleteCCProject} CCPID = {fetchedCCPID} projectName = {fetchedCCProject}></DeleteCCProject>*/}
+      <DeleteCCProject openPopupDeleteCCProject={openPopupDeleteCCProject} setOpenPopupDeleteCCProject={setOpenPopupDeleteCCProject} CCPID = {fetchedCCPID} projectName = {fetchedCCProject}></DeleteCCProject>
 
     </Box>
   );  
