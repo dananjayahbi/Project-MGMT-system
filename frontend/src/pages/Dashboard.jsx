@@ -26,6 +26,7 @@ import ChangePassword from './Settings/ChangePassword';
 import DatabaseBackup from './Settings/DatabaseBackup';
 import FProjectCategories from './FiverrProjects/FProjectCategories';
 import CCProjectCategories from './CodecannyonProj/CCProjectCategories';
+import CustomProjectCategories from './CustomProjects/CustomProjectCategories';
 import Notification from '../components/Notification';
 import axios from "axios";
 
@@ -234,6 +235,33 @@ function Dashboard() {
       });
       sessionStorage.removeItem("CCProjectDeleted");
     }
+
+    if (sessionStorage.getItem("CustPCategoryCreated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Custom project Created Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CustPCategoryCreated");
+    }
+
+    if (sessionStorage.getItem("CustPCategoryUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Custom project Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CustPCategoryUpdated");
+    }
+
+    if (sessionStorage.getItem("CustPCategoryDeleted") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Custom project Deleted Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CustPCategoryDeleted");
+    }
   });
 
 
@@ -278,6 +306,7 @@ function Dashboard() {
                 <Route path="/codecannyon/CCPCategories" element={<CCProjectCategories />} />
                 <Route path="/customproj/ManageCUProjects" element={<ManageCUProjects />} />
                 <Route path="/customproj/MonitorCUProjects" element={<MonitorCUProjects />} />
+                <Route path="/customproj/CustPCategories" element={<CustomProjectCategories />} />
                 <Route path="/finance/ManageFinance" element={<ManageFinance />} />
                 <Route path="/finance/MonitorFinance" element={<MonitorFinance />} />
                 <Route path="/users/usersList" element={<UsersList />} />

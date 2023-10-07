@@ -15,6 +15,7 @@ const addRole = async (req, res) => {
       "CCP Categories",
       "Manage Custom Projects",
       "Monitor Custom Projects",
+      "Custom Project Categories",
       "Manage Finance",
       "Monitor Finance",
       "Users List",
