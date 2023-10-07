@@ -239,7 +239,7 @@ function Dashboard() {
     if (sessionStorage.getItem("CustPCategoryCreated") == "1") {
       setNotify({
         isOpen: true,
-        message: "Custom project Created Successfully!",
+        message: "Custom project Category Created Successfully!",
         type: "success",
       });
       sessionStorage.removeItem("CustPCategoryCreated");
@@ -248,7 +248,7 @@ function Dashboard() {
     if (sessionStorage.getItem("CustPCategoryUpdated") == "1") {
       setNotify({
         isOpen: true,
-        message: "Custom project Updated Successfully!",
+        message: "Custom project Category Updated Successfully!",
         type: "success",
       });
       sessionStorage.removeItem("CustPCategoryUpdated");
@@ -257,10 +257,37 @@ function Dashboard() {
     if (sessionStorage.getItem("CustPCategoryDeleted") == "1") {
       setNotify({
         isOpen: true,
-        message: "Custom project Deleted Successfully!",
+        message: "Custom project Category Deleted Successfully!",
         type: "success",
       });
       sessionStorage.removeItem("CustPCategoryDeleted");
+    }
+
+    if (sessionStorage.getItem("CustProjectCreated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Custom project Created Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CustProjectCreated");
+    }
+
+    if (sessionStorage.getItem("CustProjectUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Custom project Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CustProjectUpdated");
+    }
+
+    if (sessionStorage.getItem("CustProjectDeleted") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Custom project Deleted Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CustProjectDeleted");
     }
   });
 
