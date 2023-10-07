@@ -112,8 +112,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
   },[loggedInUserDetails])
 
   function checkPageAccess(pageName) {
-    //pageAccess(loggedInUserDetails.role,pageName)
     const pagePermission = pagePermissions.find(permission => permission.page === pageName);
+    //console.log(pagePermission)
+    console.log()
     
     if(pagePermission){
       return true;
@@ -825,7 +826,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
 
-                          {checkPageAccess("SMS API") ?(
+                          {checkPageAccess("Company Profile") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -842,7 +843,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ): null}
 
-                          {checkPageAccess("SMS API") ?(
+                          {checkPageAccess("Site Settings") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -859,7 +860,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ): null}
 
-                          {checkPageAccess("SMS API") ?(
+                          {checkPageAccess("Change Password") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -876,7 +877,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ): null}
 
-                          {checkPageAccess("SMS API") ?(
+                          {checkPageAccess("Database Backup") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
