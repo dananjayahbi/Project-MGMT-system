@@ -29,7 +29,7 @@ import TaskIcon from '@mui/icons-material/Task';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import TasksTable from "../../components/Dashboard/TasksTable";
-//import AddFProject from "./AddFProject";
+import AddFPTask from "./AddFPTask";
 //import UpdateFPProject from "./UpdateFProject";
 //import DeleteFProject from "./DeleteFProject";
 
@@ -37,7 +37,7 @@ export default function ManageFPTasks() {
   const [FProjects, setFProjects] = useState([]);
   const [filteredFProjects, setFilteredFProjects] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
-  const [openPopupAddFProject, setOpenPopupAddFProject] = useState(false); 
+  const [openPopupAddFPTask, setOpenPopupAddFPTask] = useState(false); 
   const [openPopupUpdateFProject, setOpenPopupUpdateFProject] = useState(false);
   const [openPopupDeleteFProject, setOpenPopupDeleteFProject] = useState(false);
   const [fetchedFPID, setFetchedFPID] = useState(null);
@@ -47,6 +47,7 @@ export default function ManageFPTasks() {
   const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedProjectTasks, setSelectedProjectTasks] = useState([]);
+
   
   //Fetch All Fiverr Projects
   useEffect(() => {
@@ -63,7 +64,7 @@ export default function ManageFPTasks() {
     };
 
     fetchFProjects();
-  }, [openPopupAddFProject, openPopupUpdateFProject, openPopupDeleteFProject]);
+  }, [openPopupAddFPTask, openPopupUpdateFProject, openPopupDeleteFProject]);
 
   // Search functionality
   const [searchTerm, setSearchTerm] = useState("");
@@ -84,7 +85,8 @@ export default function ManageFPTasks() {
     //console.log("Selected Project:", project.projectName);
     setSelectedProject(project.projectName);
     setSelectedProjectTasks(project.tasks || []);
-   //console.log(selectedProjectTasks)
+    setFetchedFPID(project._id);
+   //console.log(project._id)
     setSearchTerm(project.projectName); // Update the search term
     setShowDropdown(false);
   };
@@ -104,6 +106,11 @@ export default function ManageFPTasks() {
     };
   }, [showDropdown]);
 
+  //Handle Add Task
+  function handleAddTask(FPID){
+    setFetchedFPID(FPID);
+    setOpenPopupAddFPTask(true);
+  }
 
   /*//Handle Update
   function handleUpdate(FPID){
@@ -126,7 +133,7 @@ export default function ManageFPTasks() {
         <Divider sx={{ mt: 2, mb: 7.5 }} />
       </Box>
 
-      <Button
+        <Button
           variant="contained"
           startIcon={<ArrowBackIcon />}
           onClick={() => navigate("/fiverr/ManageFProjects")}
@@ -138,12 +145,13 @@ export default function ManageFPTasks() {
       <Box display="flex" justifyContent="flex-end" sx={{ mt: -3 }}>
 
         <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={() => {setOpenPopupAddFProject(true)}}
-          sx={{ mt: -2, height: "40px" }}
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => { setOpenPopupAddFPTask(true) }}
+            sx={{ mt: -2, height: "40px" }}
+            disabled={!selectedProject || selectedProject.trim() === ""}
         >
-          New Project
+             New Project
         </Button>
       </Box>
 
@@ -155,7 +163,7 @@ export default function ManageFPTasks() {
             onChange={handleSearchTermChange}
             fullWidth
             margin="dense"
-            style={{ width: "100%", marginInlineEnd: "10px", marginTop: "20px" }}
+            style={{ width: "100%", marginInlineEnd: "10px", marginTop: "20px", marginBottom: "20px" }}
             InputLabelProps={{ style: { fontSize: "14px" } }} // Reduce font size of label
             inputProps={{
                 style: {
@@ -199,8 +207,8 @@ export default function ManageFPTasks() {
         </Box>
 
 
-      {/*<AddFProject openPopupAddFProject={openPopupAddFProject} setOpenPopupAddFProject={setOpenPopupAddFProject}></AddFProject>
-      <UpdateFPProject openPopupUpdateFProject={openPopupUpdateFProject} setOpenPopupUpdateFProject={setOpenPopupUpdateFProject} FPID = {fetchedFPID}></UpdateFPProject>
+      <AddFPTask openPopupAddFPTask={openPopupAddFPTask} setOpenPopupAddFPTask={setOpenPopupAddFPTask} FPID = {fetchedFPID} fetchedFPtasks = {selectedProjectTasks}></AddFPTask>
+      {/*<UpdateFPProject openPopupUpdateFProject={openPopupUpdateFProject} setOpenPopupUpdateFProject={setOpenPopupUpdateFProject} FPID = {fetchedFPID}></UpdateFPProject>
                 <DeleteFProject openPopupDeleteFProject={openPopupDeleteFProject} setOpenPopupDeleteFProject={setOpenPopupDeleteFProject} FPID = {fetchedFPID} projectName = {fetchedFProject}></DeleteFProject>*/}
 
     </Box>

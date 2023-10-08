@@ -290,6 +290,15 @@ function Dashboard() {
       });
       sessionStorage.removeItem("CustProjectDeleted");
     }
+
+    if (sessionStorage.getItem("FPTaskAdded") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Task Added Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("FPTaskAdded");
+    }
   });
 
 
