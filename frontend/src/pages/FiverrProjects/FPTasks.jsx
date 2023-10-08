@@ -45,8 +45,8 @@ export default function ManageFPTasks() {
   const [showDropdown, setShowDropdown] = useState(false); // Control the visibility of the dropdown
   const tableRef = useRef(null);
   const navigate = useNavigate();
-  let selectedProject;
-
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProjectTasks, setSelectedProjectTasks] = useState([]);
   
   //Fetch All Fiverr Projects
   useEffect(() => {
@@ -81,13 +81,13 @@ export default function ManageFPTasks() {
 
 
   const handleProjectClick = (project) => {
-    console.log("Selected Project:", project.projectName);
-    selectedProject = project.projectName;
-    console.log(selectedProject);
+    //console.log("Selected Project:", project.projectName);
+    setSelectedProject(project.projectName);
+    setSelectedProjectTasks(project.tasks || []);
+   //console.log(selectedProjectTasks)
     setSearchTerm(project.projectName); // Update the search term
     setShowDropdown(false);
   };
-
 
   useEffect(() => {
     // Event listener to close the dropdown when clicking away
@@ -195,7 +195,7 @@ export default function ManageFPTasks() {
         )}
 
         <Box>
-            <TasksTable/>
+            <TasksTable selectedProject={selectedProject} selectedProjectTasks={selectedProjectTasks}/>
         </Box>
 
 
