@@ -299,6 +299,15 @@ function Dashboard() {
       });
       sessionStorage.removeItem("FPTaskAdded");
     }
+
+    if (sessionStorage.getItem("FPTaskUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Task Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("FPTaskUpdated");
+    }
   });
 
 

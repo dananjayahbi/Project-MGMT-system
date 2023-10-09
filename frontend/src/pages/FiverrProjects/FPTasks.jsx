@@ -6,26 +6,12 @@ import {
   List,
   ListItem,
   ListItemText,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   TextField,
-  IconButton,
-  CircularProgress, // Added for loading animation
   Typography,
   Divider,
-  Chip,
 } from "@mui/material";
 
-import {
-  Add as AddIcon,
-  Edit as EditIcon,
-  Delete as DeleteIcon,
-} from "@mui/icons-material";
-import TaskIcon from '@mui/icons-material/Task';
+import {Add as AddIcon} from "@mui/icons-material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import TasksTable from "../../components/Dashboard/TasksTable";
@@ -145,7 +131,7 @@ export default function ManageFPTasks() {
             sx={{ mt: -2, height: "40px" }}
             disabled={!selectedProject || selectedProject.trim() === ""}
         >
-             New Project
+             New Task
         </Button>
       </Box>
 

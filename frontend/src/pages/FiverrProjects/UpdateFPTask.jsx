@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {
   Button,
@@ -7,16 +7,19 @@ import {
   Divider,
   Dialog,
   DialogContent,
-  CircularProgress,
   DialogTitle,
+  Select,
   Slide,
+  FormControl,
+  InputLabel,
+  MenuItem
 } from "@mui/material";
 import axios from "axios";
 import CustomTextField from "../../components/CustomTextField"
 import ClearIcon from "@mui/icons-material/Clear";
-import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import Notification from "../../components/Notification";
+import LoopIcon from '@mui/icons-material/Loop';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -40,7 +43,7 @@ export default function UpdateFPTask(props) {
   const { openPopupUpdateFPTask, setOpenPopupUpdateFPTask } = props;
   const [tasks, setTasks] = useState([]);
   const [targetTask, setTargetTask] = useState(null);
-  //console.log(props)
+  const status = ["Requested", "Processing", "Reviewing", "Completed", "Cancelled"];
 
   const apiUrl = `http://localhost:8070/fiverrProjects/updateFiverrProject/${props.FPID}`; // Change to your API URL
 
@@ -59,7 +62,7 @@ const handleSubmit = async (values, { setSubmitting }) => {
         taskID: values.taskID,
         taskName: values.taskName,
         description: values.description,
-        taskGroupNo: values.taskGroupNo,
+        priorityIndex: values.priorityIndex,
         status: values.status,
         notes: values.notes,
       };
@@ -127,7 +130,7 @@ const handleSubmit = async (values, { setSubmitting }) => {
             initialValues={{
                 taskID: props.targetTask?.taskID,
                 taskName: targetTask?.taskName|| "",
-                taskGroupNo: targetTask?.taskGroupNo|| "",
+                priorityIndex: targetTask?.priorityIndex|| "",
                 status: targetTask?.status|| "",
                 description: targetTask?.description|| "",
                 notes: targetTask?.notes|| "",
@@ -146,11 +149,26 @@ const handleSubmit = async (values, { setSubmitting }) => {
               </Grid>
               
               <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="taskGroupNo" label="Task Group No" />
+                <CustomTextField name="priorityIndex" label="Priority Index" />
               </Grid>
 
-              <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="status" label="Status" />
+              <Grid item xs={6}>
+                <FormControl fullWidth variant="outlined">
+                    <InputLabel htmlFor="status">Status</InputLabel>
+                    <Field
+                        as={Select}
+                        name="status"
+                        label="status"
+                        inputProps={{ id: "status" }}
+                    >
+                        <MenuItem value="">Select the Status</MenuItem>
+                        {status.map((stat) => (
+                        <MenuItem key={stat} value={stat}>
+                            {stat}
+                        </MenuItem>
+                        ))}
+                    </Field>
+                </FormControl>
               </Grid>
 
               <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
@@ -179,7 +197,7 @@ const handleSubmit = async (values, { setSubmitting }) => {
                   variant="contained"
                   color="primary"
                   disabled={isSubmitting}
-                  startIcon={<AddIcon />}
+                  startIcon={<LoopIcon />}
                 >
                   Update
                 </Button>

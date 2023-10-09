@@ -5,7 +5,6 @@ import {
     IconButton,
 } from "@mui/material";
 import {
-    Add as AddIcon,
     Edit as EditIcon,
     Delete as DeleteIcon,
 } from "@mui/icons-material";
@@ -15,7 +14,6 @@ function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTa
 
     const [fetchedTID, setFetchedTID] = useState(null);
     const [targetTask, setTargetTask] = useState(null);
-    //console.log(targetTask);
 
 
     useEffect(() => {
@@ -51,7 +49,7 @@ function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTa
   return (
     <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
       <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-        <h2 className="font-semibold text-slate-800 dark:text-slate-100">Tasks for Project: {selectedProject ? selectedProject.projectName : ''}</h2>
+        <h2 className="font-semibold text-slate-800 dark:text-slate-100">Tasks for Project: {selectedProject ? selectedProject : ''}</h2>
       </header>
       <div className="p-3">
         {/* Table */}
@@ -70,7 +68,7 @@ function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTa
                   <div className="font-semibold text-center">Description</div>
                 </th>
                 <th className="p-2">
-                  <div className="font-semibold text-center">Task Group</div>
+                  <div className="font-semibold text-center">Priority Index</div>
                 </th>
                 <th className="p-2">
                   <div className="font-semibold text-center">Status</div>
@@ -95,7 +93,7 @@ function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTa
                         <div className="text-center">{task.description}</div>
                     </td>
                     <td className="p-2">
-                        <div className="text-center text-sky-500">{task.taskGroupNo}</div>
+                        <div className="text-center text-sky-500">{task.priorityIndex}</div>
                     </td>
                     <td className="p-2 text-center">
                         {(() => {

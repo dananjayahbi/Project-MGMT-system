@@ -57,7 +57,7 @@ export default function AddFPTask(props) {
         taskID: values.taskID,
         taskName: values.taskName,
         description: values.description,
-        taskGroupNo: values.taskGroupNo,
+        priorityIndex: values.priorityIndex,
         status: values.status,
         notes: values.notes,
       };
@@ -129,7 +129,7 @@ export default function AddFPTask(props) {
               </Grid>
               
               <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="taskGroupNo" label="Task Group No" />
+                <CustomTextField name="priorityIndex" label="Priority Index" />
               </Grid>
 
               <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
