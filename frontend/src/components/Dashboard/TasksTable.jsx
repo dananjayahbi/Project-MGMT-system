@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from "react";
 import { 
     Chip,
     IconButton,
@@ -8,11 +9,45 @@ import {
     Edit as EditIcon,
     Delete as DeleteIcon,
 } from "@mui/icons-material";
+import UpdateFPTask from "../../pages/FiverrProjects/UpdateFPTask";
 
-function TasksTable({ selectedProject, selectedProjectTasks }) {
+function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTask, setOpenPopupUpdateFPTask, FPID }) {
 
-    //console.log(selectedProject)
-    //console.log(selectedProjectTasks)
+    const [fetchedTID, setFetchedTID] = useState(null);
+    const [targetTask, setTargetTask] = useState(null);
+    //console.log(targetTask);
+
+
+    useEffect(() => {
+        // Check if targetTask has been updated and open the popup if it has
+        if (targetTask != null) {
+            //console.log(targetTask);
+            setOpenPopupUpdateFPTask(true);
+        }
+    }, [targetTask, setOpenPopupUpdateFPTask]);
+
+    async function fetchTaskAndUpdate(TID) {
+        try {
+            if (selectedProjectTasks != null) {
+                const relevantTask = selectedProjectTasks.find(
+                    (task) => task._id === TID
+                );
+
+                if (relevantTask) {
+                    setTargetTask(relevantTask); 
+                }
+            }
+        } catch (error) {
+            console.error("Error fetching task data:", error);
+        }
+    }
+
+    //Handle Update
+    const handleUpdate = (TID) => {
+        setFetchedTID(TID);
+        fetchTaskAndUpdate(TID);
+    };
+
   return (
     <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
       <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
@@ -83,10 +118,10 @@ function TasksTable({ selectedProject, selectedProjectTasks }) {
                     </td>
                     <td className="p-2">
                         <div className="text-center">
-                        <IconButton onClick={()=>{handleUpdate(Project._id)}}>
+                        <IconButton onClick={()=>{handleUpdate(task._id)}}>
                             <EditIcon />
                         </IconButton>
-                        <IconButton onClick={()=>{handleDelete(Project._id, Project.projectName)}}>
+                        <IconButton onClick={()=>{handleDelete(tsak._id, Project.projectName)}}>
                             <DeleteIcon />
                         </IconButton>
                         </div>
@@ -97,6 +132,14 @@ function TasksTable({ selectedProject, selectedProjectTasks }) {
           </table>
         </div>
       </div>
+      <UpdateFPTask 
+        openPopupUpdateFPTask={openPopupUpdateFPTask} 
+        setOpenPopupUpdateFPTask={setOpenPopupUpdateFPTask} 
+        TID = {fetchedTID}
+        FPID = {FPID} 
+        selectedProjectTasks = {selectedProjectTasks}
+        targetTask = {targetTask}
+      ></UpdateFPTask>
     </div>
   );
 }

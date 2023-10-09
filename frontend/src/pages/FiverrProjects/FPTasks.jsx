@@ -30,7 +30,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import TasksTable from "../../components/Dashboard/TasksTable";
 import AddFPTask from "./AddFPTask";
-//import UpdateFPProject from "./UpdateFProject";
 //import DeleteFProject from "./DeleteFProject";
 
 export default function ManageFPTasks() {
@@ -38,7 +37,7 @@ export default function ManageFPTasks() {
   const [filteredFProjects, setFilteredFProjects] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
   const [openPopupAddFPTask, setOpenPopupAddFPTask] = useState(false); 
-  const [openPopupUpdateFProject, setOpenPopupUpdateFProject] = useState(false);
+  const [openPopupUpdateFPTask, setOpenPopupUpdateFPTask] = useState(false);
   const [openPopupDeleteFProject, setOpenPopupDeleteFProject] = useState(false);
   const [fetchedFPID, setFetchedFPID] = useState(null);
   const [fetchedFProject, setFetchedFProject] = useState(null); //for delete functionality
@@ -64,7 +63,7 @@ export default function ManageFPTasks() {
     };
 
     fetchFProjects();
-  }, [openPopupAddFPTask, openPopupUpdateFProject, openPopupDeleteFProject]);
+  }, [openPopupAddFPTask, openPopupUpdateFPTask, openPopupDeleteFProject]);
 
   // Search functionality
   const [searchTerm, setSearchTerm] = useState("");
@@ -105,18 +104,13 @@ export default function ManageFPTasks() {
       document.removeEventListener("mousedown", closeDropdownOnOutsideClick);
     };
   }, [showDropdown]);
+  
 
-  //Handle Add Task
-  function handleAddTask(FPID){
-    setFetchedFPID(FPID);
-    setOpenPopupAddFPTask(true);
-  }
-
-  /*//Handle Update
+  //Handle Update
   function handleUpdate(FPID){
     setFetchedFPID(FPID);
-    setOpenPopupUpdateFProject(true);
-  }*/
+    setOpenPopupUpdateFPTask(true);
+  }
 
   /*//Handle Delete
   function handleDelete(FPID, Project){
@@ -203,13 +197,18 @@ export default function ManageFPTasks() {
         )}
 
         <Box>
-            <TasksTable selectedProject={selectedProject} selectedProjectTasks={selectedProjectTasks}/>
+            <TasksTable 
+                selectedProject={selectedProject} 
+                selectedProjectTasks={selectedProjectTasks} 
+                openPopupUpdateFPTask={openPopupUpdateFPTask}
+                setOpenPopupUpdateFPTask={setOpenPopupUpdateFPTask}
+                FPID = {fetchedFPID}
+            />
         </Box>
 
 
       <AddFPTask openPopupAddFPTask={openPopupAddFPTask} setOpenPopupAddFPTask={setOpenPopupAddFPTask} FPID = {fetchedFPID} fetchedFPtasks = {selectedProjectTasks}></AddFPTask>
-      {/*<UpdateFPProject openPopupUpdateFProject={openPopupUpdateFProject} setOpenPopupUpdateFProject={setOpenPopupUpdateFProject} FPID = {fetchedFPID}></UpdateFPProject>
-                <DeleteFProject openPopupDeleteFProject={openPopupDeleteFProject} setOpenPopupDeleteFProject={setOpenPopupDeleteFProject} FPID = {fetchedFPID} projectName = {fetchedFProject}></DeleteFProject>*/}
+        {/*        <DeleteFProject openPopupDeleteFProject={openPopupDeleteFProject} setOpenPopupDeleteFProject={setOpenPopupDeleteFProject} FPID = {fetchedFPID} projectName = {fetchedFProject}></DeleteFProject>*/}
 
     </Box>
   );  
