@@ -16,7 +16,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import TasksTable from "../../components/Dashboard/TasksTable";
 import AddFPTask from "./AddFPTask";
-//import DeleteFProject from "./DeleteFProject";
+import DeleteFPTask from "./DeleteFPTask";
 
 export default function ManageFPTasks() {
   const [FProjects, setFProjects] = useState([]);
@@ -24,7 +24,7 @@ export default function ManageFPTasks() {
   const [loading, setLoading] = useState(true); // Loading state
   const [openPopupAddFPTask, setOpenPopupAddFPTask] = useState(false); 
   const [openPopupUpdateFPTask, setOpenPopupUpdateFPTask] = useState(false);
-  const [openPopupDeleteFProject, setOpenPopupDeleteFProject] = useState(false);
+  const [openPopupDeleteFPTask, setOpenPopupDeleteFPTask] = useState(false);
   const [fetchedFPID, setFetchedFPID] = useState(null);
   const [fetchedFProject, setFetchedFProject] = useState(null); //for delete functionality
   const [showDropdown, setShowDropdown] = useState(false); // Control the visibility of the dropdown
@@ -49,7 +49,7 @@ export default function ManageFPTasks() {
     };
 
     fetchFProjects();
-  }, [openPopupAddFPTask, openPopupUpdateFPTask, openPopupDeleteFProject]);
+  }, [openPopupAddFPTask, openPopupUpdateFPTask, openPopupDeleteFPTask]);
 
   // Search functionality
   const [searchTerm, setSearchTerm] = useState("");
@@ -98,12 +98,12 @@ export default function ManageFPTasks() {
     setOpenPopupUpdateFPTask(true);
   }
 
-  /*//Handle Delete
+  //Handle Delete
   function handleDelete(FPID, Project){
     setFetchedFProject(Project);
     setFetchedFPID(FPID);
-    setOpenPopupDeleteFProject(true);
-  }*/
+    setOpenPopupDeleteFPTask(true);
+  }
 
   
   return (
@@ -189,13 +189,13 @@ export default function ManageFPTasks() {
                 openPopupUpdateFPTask={openPopupUpdateFPTask}
                 setOpenPopupUpdateFPTask={setOpenPopupUpdateFPTask}
                 FPID = {fetchedFPID}
+                openPopupDeleteFPTask = {openPopupDeleteFPTask}
+                setOpenPopupDeleteFPTask = {setOpenPopupDeleteFPTask}
             />
         </Box>
 
 
       <AddFPTask openPopupAddFPTask={openPopupAddFPTask} setOpenPopupAddFPTask={setOpenPopupAddFPTask} FPID = {fetchedFPID} fetchedFPtasks = {selectedProjectTasks}></AddFPTask>
-        {/*        <DeleteFProject openPopupDeleteFProject={openPopupDeleteFProject} setOpenPopupDeleteFProject={setOpenPopupDeleteFProject} FPID = {fetchedFPID} projectName = {fetchedFProject}></DeleteFProject>*/}
-
     </Box>
   );  
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {
   Button,
@@ -8,7 +8,11 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  FormControl,
+  Select,
   Slide,
+  InputLabel,
+  MenuItem
 } from "@mui/material";
 import axios from "axios";
 import CustomTextField from "../../components/CustomTextField"
@@ -44,6 +48,7 @@ export default function AddFPTask(props) {
   const navigate = useNavigate();
   const { openPopupAddFPTask, setOpenPopupAddFPTask } = props;
   const [tasks, setTasks] = useState([]);
+  const status = ["Requested", "Processing", "Reviewing", "Completed", "Cancelled"];
 
   const apiUrl = `http://localhost:8070/fiverrProjects/updateFiverrProject/${props.FPID}`; // Change to your API URL
 
@@ -121,10 +126,6 @@ export default function AddFPTask(props) {
             {({ isSubmitting, values }) => (
             <Form>
               <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="taskID" label="Task ID" />
-              </Grid>
-
-              <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
                 <CustomTextField name="taskName" label="Task Name" />
               </Grid>
               
@@ -132,8 +133,23 @@ export default function AddFPTask(props) {
                 <CustomTextField name="priorityIndex" label="Priority Index" />
               </Grid>
 
-              <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="status" label="Status" />
+              <Grid item xs={6}>
+                <FormControl fullWidth variant="outlined">
+                    <InputLabel htmlFor="status">Status</InputLabel>
+                    <Field
+                        as={Select}
+                        name="status"
+                        label="status"
+                        inputProps={{ id: "status" }}
+                    >
+                        <MenuItem value="" disabled>Select the Status</MenuItem>
+                        {status.map((stat) => (
+                        <MenuItem key={stat} value={stat}>
+                            {stat}
+                        </MenuItem>
+                        ))}
+                    </Field>
+                </FormControl>
               </Grid>
 
               <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>

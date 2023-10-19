@@ -1,25 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
   Button,
-  Grid,
   Divider,
   Dialog,
   DialogContent,
   DialogTitle,
-  Select,
   Slide,
-  FormControl,
-  InputLabel,
-  MenuItem
 } from "@mui/material";
 import axios from "axios";
-import CustomTextField from "../../components/CustomTextField"
+import DeleteIcon from '@mui/icons-material/Delete';
 import ClearIcon from "@mui/icons-material/Clear";
 import { useNavigate } from "react-router-dom";
 import Notification from "../../components/Notification";
-import LoopIcon from '@mui/icons-material/Loop';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -33,17 +27,16 @@ const validationSchema = Yup.object({
 });  
 
 //The Main function
-export default function UpdateFPTask(props) {
+export default function DeleteFPTask(props) {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
   const navigate = useNavigate();
-  const { openPopupUpdateFPTask, setOpenPopupUpdateFPTask } = props;
+  const { openPopupDeleteFPTask, setOpenPopupDeleteFPTask } = props;
   const [tasks, setTasks] = useState([]);
-  const [targetTask, setTargetTask] = useState(null);
-  const status = ["Requested", "Processing", "Reviewing", "Completed", "Cancelled"];
+  const [targetTaskD, setTargetTaskD] = useState(null);
 
   const apiUrl = `http://localhost:8070/fiverrProjects/updateFiverrProject/${props.FPID}`; // Change to your API URL
 
@@ -51,31 +44,26 @@ export default function UpdateFPTask(props) {
         
         if(props.selectedProjectTasks != null){
             setTasks(props.selectedProjectTasks);
-            setTargetTask(props.targetTask);
+            setTargetTaskD(props.targetTaskD);
         }
-    }, [props, openPopupUpdateFPTask]);
+    }, [props, openPopupDeleteFPTask]);
 
 const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const updatedTask = {
-        taskName: values.taskName,
-        description: values.description,
-        priorityIndex: values.priorityIndex,
-        status: values.status,
-        notes: values.notes,
-      };
   
       // Find the index of the task with the matching taskID
       const taskIndex = tasks.findIndex((task) => task._id === props.TID);
   
       if (taskIndex !== -1) {
-        // If a task with the matching taskID is found, update it
-        tasks[taskIndex] = updatedTask;
+        // Remove the task from the tasks array using splice
+        tasks.splice(taskIndex, 1);
+
+        console.log(taskIndex)
   
         // Send the updated tasks array to the server
         await axios.put(apiUrl, { tasks });
   
-        sessionStorage.setItem("FPTaskUpdated", "1");
+        sessionStorage.setItem("FPTaskDeleted", "1");
         navigate("/fiverr/ManageFPTasks");
       } else {
         // Handle the case where the task with the given taskID is not found
@@ -89,15 +77,15 @@ const handleSubmit = async (values, { setSubmitting }) => {
       });
     } finally {
       setSubmitting(false);
-      setOpenPopupUpdateFPTask(false);
+      setOpenPopupDeleteFPTask(false);
     }
   };  
 
   return (
     <Dialog
-      open={openPopupUpdateFPTask}
-      onBackdropClick={() => setOpenPopupUpdateFPTask(false)}
-      maxWidth="md"
+      open={openPopupDeleteFPTask}
+      onBackdropClick={() => setOpenPopupDeleteFPTask(false)}
+      maxWidth="sm"
       TransitionComponent={Transition}
       PaperProps={{
           style: { borderRadius: 10, width: "80%", pUpdateing: "20px", pUpdateingBottom: "30px"},
@@ -107,7 +95,7 @@ const handleSubmit = async (values, { setSubmitting }) => {
         <DialogTitle>
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
-            <p className="popupTitle">Update Task</p>
+            <p className="popupTitle">Confirm delete task?</p>
           </div>
         </div>
 
@@ -126,73 +114,33 @@ const handleSubmit = async (values, { setSubmitting }) => {
         <DialogContent>
           <Formik
             initialValues={{
-                taskName: targetTask?.taskName|| "",
-                priorityIndex: targetTask?.priorityIndex|| "",
-                status: targetTask?.status|| "",
-                description: targetTask?.description|| "",
-                notes: targetTask?.notes|| "",
+                taskName: targetTaskD?.taskName|| "",
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
             {({ isSubmitting, values }) => (
             <Form>
-              <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="taskName" label="Task Name" />
-              </Grid>
-              
-              <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="priorityIndex" label="Priority Index" />
-              </Grid>
-
-              <Grid item xs={6}>
-                <FormControl fullWidth variant="outlined">
-                    <InputLabel htmlFor="status">Status</InputLabel>
-                    <Field
-                        as={Select}
-                        name="status"
-                        label="status"
-                        inputProps={{ id: "status" }}
-                    >
-                        <MenuItem value="" disabled>Select the Status</MenuItem>
-                        {status.map((stat) => (
-                        <MenuItem key={stat} value={stat}>
-                            {stat}
-                        </MenuItem>
-                        ))}
-                    </Field>
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="description" label="Description"  multiline rows={6} />
-              </Grid>
-
-              <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="notes" label="Notes"  multiline rows={6} />
-              </Grid>
-
-
               <div style={{ display: "flex", justifyContent: "right", marginTop: "1rem" }}>
                 <Button
                   startIcon={<ClearIcon />}
                   style={{marginRight: "15px"}}
                   onClick={() => {
-                    setOpenPopupUpdateFPTask(false);
+                    setOpenPopupDeleteFPTask(false);
                   }}
                   variant="outlined"
                   color="primary"
                 >
-                  Close
+                  Cancel
                 </Button>
                 <Button 
                   type="submit" 
                   variant="contained"
                   color="primary"
                   disabled={isSubmitting}
-                  startIcon={<LoopIcon />}
+                  startIcon={<DeleteIcon />}
                 >
-                  Update
+                  Delete
                 </Button>
               </div>
             </Form>

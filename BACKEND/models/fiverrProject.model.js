@@ -58,7 +58,6 @@ const newFiverrProject = new Schema(
     },
     tasks: [
       {
-        taskID: String,
         taskName: String,
         description: String,
         priorityIndex: Number,

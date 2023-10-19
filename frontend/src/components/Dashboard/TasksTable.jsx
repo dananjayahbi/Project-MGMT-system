@@ -9,20 +9,27 @@ import {
     Delete as DeleteIcon,
 } from "@mui/icons-material";
 import UpdateFPTask from "../../pages/FiverrProjects/UpdateFPTask";
+import DeleteFPTask from "../../pages/FiverrProjects/DeleteFPTask";
 
-function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTask, setOpenPopupUpdateFPTask, FPID }) {
+function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTask, setOpenPopupUpdateFPTask, FPID, openPopupDeleteFPTask, setOpenPopupDeleteFPTask }) {
 
     const [fetchedTID, setFetchedTID] = useState(null);
     const [targetTask, setTargetTask] = useState(null);
+    const [targetTaskD, setTargetTaskD] = useState(null);
 
 
     useEffect(() => {
-        // Check if targetTask has been updated and open the popup if it has
         if (targetTask != null) {
-            //console.log(targetTask);
             setOpenPopupUpdateFPTask(true);
         }
     }, [targetTask, setOpenPopupUpdateFPTask]);
+
+    useEffect(() => {
+        if (targetTaskD != null) {
+            setOpenPopupDeleteFPTask(true);
+        }
+    }, [targetTaskD, setOpenPopupDeleteFPTask]);
+
 
     async function fetchTaskAndUpdate(TID) {
         try {
@@ -40,11 +47,33 @@ function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTa
         }
     }
 
+    async function fetchTaskAndDelete(TID) {
+        try {
+            if (selectedProjectTasks != null) {
+                const relevantTask = selectedProjectTasks.find(
+                    (task) => task._id === TID
+                );
+
+                if (relevantTask) {
+                    setTargetTaskD(relevantTask); 
+                }
+            }
+        } catch (error) {
+            console.error("Error fetching task data:", error);
+        }
+    }
+
     //Handle Update
     const handleUpdate = (TID) => {
         setFetchedTID(TID);
         fetchTaskAndUpdate(TID);
     };
+
+    //Handle Delete
+    const handleDelete = (TID) => {
+        setFetchedTID(TID);
+        fetchTaskAndDelete(TID);
+    }
 
   return (
     <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
@@ -58,9 +87,6 @@ function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTa
             {/* Table header */}
             <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
               <tr>
-                <th className="p-2">
-                  <div className="font-semibold text-left">Task ID</div>
-                </th>
                 <th className="p-2">
                   <div className="font-semibold text-center">Task Name</div>
                 </th>
@@ -83,9 +109,6 @@ function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTa
               {/* Row */}
               {selectedProjectTasks.map((task) => (
                 <tr>
-                    <td className="p-2">
-                        <div className="text-slate-800 dark:text-slate-100">{task.taskID}</div>
-                    </td>
                     <td className="p-2">
                         <div className="text-center text-emerald-500">{task.taskName}</div>
                     </td>
@@ -119,7 +142,7 @@ function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTa
                         <IconButton onClick={()=>{handleUpdate(task._id)}}>
                             <EditIcon />
                         </IconButton>
-                        <IconButton onClick={()=>{handleDelete(tsak._id, Project.projectName)}}>
+                        <IconButton onClick={()=>{handleDelete(task._id)}}>
                             <DeleteIcon />
                         </IconButton>
                         </div>
@@ -138,6 +161,14 @@ function TasksTable({ selectedProject, selectedProjectTasks, openPopupUpdateFPTa
         selectedProjectTasks = {selectedProjectTasks}
         targetTask = {targetTask}
       ></UpdateFPTask>
+      <DeleteFPTask
+        openPopupDeleteFPTask={openPopupDeleteFPTask} 
+        setOpenPopupDeleteFPTask={setOpenPopupDeleteFPTask} 
+        TID = {fetchedTID}
+        FPID = {FPID} 
+        selectedProjectTasks = {selectedProjectTasks}
+        targetTaskD = {targetTaskD}
+      ></DeleteFPTask>
     </div>
   );
 }
