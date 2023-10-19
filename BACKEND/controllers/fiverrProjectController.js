@@ -31,6 +31,7 @@ const addProject = async (req, res) => {
     attachments,
     status,
     notes,
+    tasks,
 } = req.body;
 
   let existingProject;
@@ -58,6 +59,8 @@ const addProject = async (req, res) => {
     attachments,
     status,
     notes,
+    tasks,
+    tasksAmount: 0,
 });
 
   if (project) {
@@ -104,6 +107,8 @@ const getProject = async (req, res) => {
         attachments,
         status,
         notes,
+        tasks,
+        tasksAmount
       } = projectObject;
   
       res.status(200).json({
@@ -120,6 +125,8 @@ const getProject = async (req, res) => {
         attachments,
         status,
         notes,
+        tasks,
+        tasksAmount
       });
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
@@ -142,6 +149,8 @@ const updateProject = async (req, res) => {
         attachments,
         status,
         notes,
+        tasks,
+        tasksAmount
       } = req.body;
   
       let updateData = {
@@ -157,6 +166,8 @@ const updateProject = async (req, res) => {
         attachments,
         status,
         notes,
+        tasks,
+        tasksAmount
       };
   
       // Updating

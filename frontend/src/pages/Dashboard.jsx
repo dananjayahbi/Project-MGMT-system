@@ -27,6 +27,7 @@ import DatabaseBackup from './Settings/DatabaseBackup';
 import FProjectCategories from './FiverrProjects/FProjectCategories';
 import CCProjectCategories from './CodecannyonProj/CCProjectCategories';
 import CustomProjectCategories from './CustomProjects/CustomProjectCategories';
+import ManageFPTasks from './FiverrProjects/FPTasks';
 import Notification from '../components/Notification';
 import axios from "axios";
 
@@ -289,6 +290,33 @@ function Dashboard() {
       });
       sessionStorage.removeItem("CustProjectDeleted");
     }
+
+    if (sessionStorage.getItem("FPTaskAdded") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Task Added Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("FPTaskAdded");
+    }
+
+    if (sessionStorage.getItem("FPTaskUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Task Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("FPTaskUpdated");
+    }
+
+    if (sessionStorage.getItem("FPTaskDeleted") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Task Deleted Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("FPTaskDeleted");
+    }
   });
 
 
@@ -328,6 +356,7 @@ function Dashboard() {
                 <Route path="/fiverr/ManageFProjects" element={<ManageFProjects />} />
                 <Route path="/fiverr/MonitorFProjects" element={<MonitorFProjects />} />
                 <Route path="/fiverr/FPCategories" element={<FProjectCategories />} />
+                <Route path="/fiverr/ManageFPTasks" element={<ManageFPTasks />} />
                 <Route path="/codecannyon/ManageCCProjects" element={<ManageCCProjects />} />
                 <Route path="/codecannyon/MonitorCCProjects" element={<MonitorCCProjects />} />
                 <Route path="/codecannyon/CCPCategories" element={<CCProjectCategories />} />

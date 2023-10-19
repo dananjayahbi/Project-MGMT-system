@@ -22,6 +22,8 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from "@mui/icons-material";
+import TaskIcon from '@mui/icons-material/Task';
+import { useNavigate } from "react-router-dom";
 import AddFProject from "./AddFProject";
 import UpdateFPProject from "./UpdateFProject";
 import DeleteFProject from "./DeleteFProject";
@@ -36,6 +38,7 @@ export default function ManageFProjects() {
   const [fetchedFPID, setFetchedFPID] = useState(null);
   const [fetchedFProject, setFetchedFProject] = useState(null); //for delete functionality
   const tableRef = useRef(null);
+  const navigate = useNavigate();
 
   
   //Fetch All Fiverr Projects
@@ -90,27 +93,36 @@ export default function ManageFProjects() {
         <Divider sx={{ mt: 2, mb: 7.5 }} />
       </Box>
 
+      <Button
+        variant="contained"
+        startIcon={<TaskIcon />}
+        onClick={() => navigate("/fiverr/ManageFPTasks")}
+        sx={{ mt: -2, height: "40px" }}
+      >
+        Task Manager
+      </Button>
+
       <Box display="flex" justifyContent="flex-end" sx={{ mt: -3 }}>
-      <TextField
-        id="outlined-basic"
-        label="Search by Project Name"
-        variant="outlined"
-        value={searchTerm}
-        onChange={handleSearchTermChange}
-        fullWidth
-        margin="dense"
-        style={{ width: "30%", marginInlineEnd: "10px", marginTop: "-20px", paddingTop: "5px" }}
-        InputLabelProps={{ style: { fontSize: "14px" } }} // Reduce font size of label
-        inputProps={{
-          style: {
-            textAlign: "left",
-            padding: "10px",
-            fontSize: "14px", // Reduce font size of input text
-            lineHeight: "1.4", // Vertically center the text
-          },
-          type: "search", // Change the type attribute
-        }}
-      />
+        <TextField
+          id="outlined-basic"
+          label="Search by Project Name"
+          variant="outlined"
+          value={searchTerm}
+          onChange={handleSearchTermChange}
+          fullWidth
+          margin="dense"
+          style={{ width: "30%", marginInlineEnd: "10px", marginTop: "-20px", paddingTop: "5px" }}
+          InputLabelProps={{ style: { fontSize: "14px" } }} // Reduce font size of label
+          inputProps={{
+            style: {
+              textAlign: "left",
+              padding: "10px",
+              fontSize: "14px", // Reduce font size of input text
+              lineHeight: "1.4", // Vertically center the text
+            },
+            type: "search", // Change the type attribute
+          }}
+        />
 
         <Button
           variant="contained"
